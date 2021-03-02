@@ -17,7 +17,9 @@ vagrant ssh
 # Copy https://github.com/splitkb/qmk_firmware/tree/lily58-splitkb/keyboards/lily58/keymaps/splitkb into the lily folder and
 
 cd /vagrant
-make lily58/nii
+make lily58/rev1:nii
+# or
+make lily58:nii
 
 
 ```
