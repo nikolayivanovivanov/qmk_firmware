@@ -1,5 +1,6 @@
 .cache/
 .vim
+users/
 bin
 .history/
 .dep
