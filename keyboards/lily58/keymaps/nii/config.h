@@ -32,7 +32,8 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 #define TAPPING_FORCE_HOLD
 #define TAPPING_FORCE_HOLD_PER_KEY
 #define TAPPING_TERM 200
-#define ONESHOT_TAP_TOGGLE 15
+// hope that this disables this feature
+/* #define ONESHOT_TAP_TOGGLE 15 */
 
 #undef RGBLED_NUM
 #define RGBLIGHT_ANIMATIONS
