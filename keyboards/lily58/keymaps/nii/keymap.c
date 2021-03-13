@@ -498,7 +498,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
   ST_MACRO_LCBR , TO(_QWERTY) , LCTL(KC_RIGHT) , LCTL(KC_RIGHT)                      , LCTL(KC_Y) , OSL(_VIMIDEA)         /* ,                         , */       , LCTL(KC_INSERT) , LCTL(KC_Z)     , KC_HOME          , KC_END   , LSFT(KC_INSERT) , KC_PGUP ,
   KC_NO         , OSL(_APP)   , OSL(_VIMIDEA)          , KC_DELETE                           , KC_NO      , KC_NO    /*              ,                         , */       , KC_LEFT         , KC_DOWN        , KC_UP            , KC_RIGHT , LALT(KC_DOWN)   , KC_PGDN ,
   KC_LSHIFT     , KC_NO       , LCTL(KC_X)     , KC_DELETE                           , KC_LSFT    , LCTL(KC_LEFT)            , OSL(_APP)               , KC_BSPC  , KC_F3           , KC_APPLICATION , LSFT(KC_TAB)     , KC_TAB   , LCTL(KC_F)      , KC_ENT  ,
-   /*           ,             ,                , */                          KC_LALT , KC_LCTRL   , OSL(_DBGL)  , KC_F23/*autocomplete*/ , KC_ENTER , KC_RSHIFT       , LCTL(KC_ENT)   , OSM(MOD_RGUI) /* ,          , */
+   /*           ,             ,                , */                          KC_LALT , KC_LCTRL   , OSL(_DBGL)  , KC_F23/*autocomplete*/ , KC_ENTER , KC_RSHIFT       , LCTL(KC_ENT)   , LALT(KC_ENT) /* ,          , */
   )                                  ,
 
   [_VIMIDEA] = LAYOUT(
