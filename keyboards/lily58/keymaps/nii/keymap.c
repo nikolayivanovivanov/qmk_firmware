@@ -489,7 +489,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
   ST_MACRO_LBRK           , KC_Q , KC_W , KC_E                      , KC_R           , KC_T      /*  ,                , */      , KC_Y      , KC_U            , KC_I            , KC_O   , KC_P    , ST_MACRO_RBRK ,
   ST_MACRO_GRAVE          , KC_A , KC_S , KC_D                      , KC_F           , KC_G     /*   ,                , */      , KC_H      , KC_J            , KC_K            , KC_L   , KC_SCLN , ST_MACRO_QUOT ,
   KC_LSPO                 , KC_Z , KC_X , KC_C                      , KC_V           , KC_B          , TD(TD_ESC_F13) , KC_BSPC , KC_N      , KC_M            , KC_COMM         , KC_DOT , KC_SLSH , KC_RSPC       ,
-                       /* ,      ,      , */      LALT_T(KC_EXLM) , LCTL_T(KC_BSLASH) , KC_LSHIFT     , MO(_NAV)       , KC_SPC  , KC_RSHIFT , RCTL_T(KC_MINS) , LALT_T(KC_BSLASH) /* ,        , */
+                       /* ,      ,      , */      LALT_T(KC_EXLM) , LCTL_T(KC_EQL) , KC_LSHIFT     , MO(_NAV)       , KC_SPC  , KC_RSHIFT , RCTL_T(KC_MINS) , LALT_T(KC_BSLASH) /* ,        , */
 ),
 
   // vim normal
