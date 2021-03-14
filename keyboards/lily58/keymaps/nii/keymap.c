@@ -133,6 +133,65 @@ enum custom_keycodes {
     /* ST_MACRO_51, */
 };
 
+// Lag and leads to unwanted layer switches
+/* enum combos { */
+/*   WE_LAYER_APP, */
+/*   SD_LAYER_VIMIDEA, */
+/*   XC_LAYER_DEBUG, */
+/*   IO_LAYER_APP_R, */
+/*   KL_LAYER_VIMIDEA_R */
+/* }; */
+
+/* const uint16_t PROGMEM we_combo[] = {KC_W, KC_E, COMBO_END}; */
+/* const uint16_t PROGMEM sd_combo[] = {KC_S, KC_D, COMBO_END}; */
+/* const uint16_t PROGMEM xc_combo[] = {KC_X, KC_C, COMBO_END}; */
+/* const uint16_t PROGMEM io_combo[] = {KC_I, KC_O, COMBO_END}; */
+/* const uint16_t PROGMEM kl_combo[] = {KC_K, KC_L, COMBO_END}; */
+
+/* combo_t key_combos[COMBO_COUNT] = { */
+/*   [WE_LAYER_APP] = COMBO_ACTION(we_combo), */
+/*   [IO_LAYER_APP_R] = COMBO_ACTION(io_combo), */
+/*   [SD_LAYER_VIMIDEA] = COMBO_ACTION(sd_combo), */
+/*   [KL_LAYER_VIMIDEA_R] = COMBO_ACTION(kl_combo), */
+/*   [XC_LAYER_DEBUG] = COMBO_ACTION(xc_combo) */
+/* }; */
+
+/* void process_combo_event(uint16_t combo_index, bool pressed) { */
+/*   switch(combo_index) { */
+/*     case WE_LAYER_APP: */
+/*     case IO_LAYER_APP_R: */
+/*       if (pressed) { */
+/*           layer_clear(); */
+/*           layer_on(_APP); */
+/*           /1* tap_code16(LCTL(KC_C)); *1/ */
+/*       } else { */
+/*           layer_clear(); */
+/*           layer_on(_QWERTY); */
+/*       } */
+/*       break; */
+/*     case SD_LAYER_VIMIDEA: */
+/*     case KL_LAYER_VIMIDEA_R: */
+/*       if (pressed) { */
+/*           layer_clear(); */
+/*           layer_on(_VIMIDEA); */
+/*           /1* tap_code16(LCTL(KC_C)); *1/ */
+/*       } else { */
+/*           layer_clear(); */
+/*           layer_on(_QWERTY); */
+/*       } */
+/*       break; */
+/*     case XC_LAYER_DEBUG: */
+/*       if (pressed) { */
+/*           layer_clear(); */
+/*           layer_on(_DBGL); */
+/*           /1* tap_code16(LCTL(KC_C)); *1/ */
+/*       } else { */
+/*           layer_clear(); */
+/*           layer_on(_QWERTY); */
+/*       } */
+/*       break; */
+/*   } */
+/* } */
 // Tap Dance '' becomes ''arrowLeft
 void dance_quot_finished(qk_tap_dance_state_t *state, void *user_data) {
     if (state->count == 1) {
@@ -422,7 +481,7 @@ void dance_f13_reset(qk_tap_dance_state_t *state, void *user_data) {
         unregister_code(KC_F13);
     }
     layer_clear();
-    layer_on(0);
+    layer_on(_QWERTY);
 }
 
 
