@@ -134,13 +134,22 @@ enum custom_keycodes {
 };
 
 // Lag and leads to unwanted layer switches
-/* enum combos { */
-/*   WE_LAYER_APP, */
-/*   SD_LAYER_VIMIDEA, */
-/*   XC_LAYER_DEBUG, */
-/*   IO_LAYER_APP_R, */
-/*   KL_LAYER_VIMIDEA_R */
-/* }; */
+enum combos {
+  SS_LAYER,
+  SS_LAYER_R,
+//   SSP_LAYER,
+//   SSP_LAYER_R
+  /* WE_LAYER_APP, */
+  /* SD_LAYER_VIMIDEA, */
+  /* XC_LAYER_DEBUG, */
+  /* IO_LAYER_APP_R, */
+  /* KL_LAYER_VIMIDEA_R */
+};
+
+const uint16_t PROGMEM ss_combo[] = {KC_LSHIFT, KC_RSHIFT, COMBO_END};
+const uint16_t PROGMEM ss_combo_r[] = {KC_RSHIFT, KC_LSHIFT, COMBO_END};
+// const uint16_t PROGMEM ssp_combo[] = {KC_LSHIFT, KC_LSPO, COMBO_END};
+// const uint16_t PROGMEM ssp_combo_r[] = {KC_RSHIFT, KC_RSPC, COMBO_END};
 
 /* const uint16_t PROGMEM we_combo[] = {KC_W, KC_E, COMBO_END}; */
 /* const uint16_t PROGMEM sd_combo[] = {KC_S, KC_D, COMBO_END}; */
@@ -148,50 +157,55 @@ enum custom_keycodes {
 /* const uint16_t PROGMEM io_combo[] = {KC_I, KC_O, COMBO_END}; */
 /* const uint16_t PROGMEM kl_combo[] = {KC_K, KC_L, COMBO_END}; */
 
-/* combo_t key_combos[COMBO_COUNT] = { */
-/*   [WE_LAYER_APP] = COMBO_ACTION(we_combo), */
-/*   [IO_LAYER_APP_R] = COMBO_ACTION(io_combo), */
-/*   [SD_LAYER_VIMIDEA] = COMBO_ACTION(sd_combo), */
-/*   [KL_LAYER_VIMIDEA_R] = COMBO_ACTION(kl_combo), */
-/*   [XC_LAYER_DEBUG] = COMBO_ACTION(xc_combo) */
-/* }; */
+combo_t key_combos[COMBO_COUNT] = {
+  [SS_LAYER] = COMBO_ACTION(ss_combo),
+  [SS_LAYER_R] = COMBO_ACTION(ss_combo_r),
+//   [SSP_LAYER] = COMBO_ACTION(ssp_combo),
+//   [SSP_LAYER_R] = COMBO_ACTION(ssp_combo_r)
+  /* [WE_LAYER_APP] = COMBO_ACTION(we_combo), */
+  /* [IO_LAYER_APP_R] = COMBO_ACTION(io_combo), */
+  /* [SD_LAYER_VIMIDEA] = COMBO_ACTION(sd_combo), */
+  /* [KL_LAYER_VIMIDEA_R] = COMBO_ACTION(kl_combo), */
+  /* [XC_LAYER_DEBUG] = COMBO_ACTION(xc_combo) */
+};
 
-/* void process_combo_event(uint16_t combo_index, bool pressed) { */
-/*   switch(combo_index) { */
-/*     case WE_LAYER_APP: */
-/*     case IO_LAYER_APP_R: */
-/*       if (pressed) { */
-/*           layer_clear(); */
-/*           layer_on(_APP); */
-/*           /1* tap_code16(LCTL(KC_C)); *1/ */
-/*       } else { */
-/*           layer_clear(); */
-/*           layer_on(_QWERTY); */
-/*       } */
-/*       break; */
-/*     case SD_LAYER_VIMIDEA: */
-/*     case KL_LAYER_VIMIDEA_R: */
-/*       if (pressed) { */
-/*           layer_clear(); */
-/*           layer_on(_VIMIDEA); */
-/*           /1* tap_code16(LCTL(KC_C)); *1/ */
-/*       } else { */
-/*           layer_clear(); */
-/*           layer_on(_QWERTY); */
-/*       } */
-/*       break; */
-/*     case XC_LAYER_DEBUG: */
-/*       if (pressed) { */
-/*           layer_clear(); */
-/*           layer_on(_DBGL); */
-/*           /1* tap_code16(LCTL(KC_C)); *1/ */
-/*       } else { */
-/*           layer_clear(); */
-/*           layer_on(_QWERTY); */
-/*       } */
-/*       break; */
-/*   } */
-/* } */
+void process_combo_event(uint16_t combo_index, bool pressed) {
+  switch(combo_index) {
+    case SS_LAYER:
+    case SS_LAYER_R:
+    /* case WE_LAYER_APP: */
+    /* case IO_LAYER_APP_R: */
+      if (pressed) {
+          layer_clear();
+          layer_on(_APP);
+      } else {
+          layer_clear();
+          layer_on(_QWERTY);
+      }
+      break;
+    // case SSP_LAYER:
+    // case SSP_LAYER_R:
+    // // case SD_LAYER_VIMIDEA:
+    // // case KL_LAYER_VIMIDEA_R:
+    //   if (pressed) {
+    //       layer_clear();
+    //       layer_on(_VIMIDEA);
+    //   } else {
+    //       layer_clear();
+    //       layer_on(_QWERTY);
+    //   }
+    //   break;
+    /* case XC_LAYER_DEBUG: */
+    /*   if (pressed) { */
+    /*       layer_clear(); */
+    /*       layer_on(_DBGL); */
+    /*   } else { */
+    /*       layer_clear(); */
+    /*       layer_on(_QWERTY); */
+    /*   } */
+    /*   break; */
+  }
+}
 // Tap Dance '' becomes ''arrowLeft
 void dance_quot_finished(qk_tap_dance_state_t *state, void *user_data) {
     if (state->count == 1) {
@@ -553,18 +567,18 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 
   // vim normal
  [_NAV] = LAYOUT(
-  OSL(_APP)     , KC_NO       , KC_NO          , OSL(_DBGL)                          , KC_NO      , KC_NO         /*         ,                         , */       , KC_HOME         , KC_PGDN        , KC_PGUP          , KC_END   , KC_NO           , KC_DEL  ,
-  ST_MACRO_LCBR , TO(_QWERTY) , LCTL(KC_RIGHT) , LCTL(KC_RIGHT)                      , LCTL(KC_Y) , OSL(_VIMIDEA)         /* ,                         , */       , LCTL(KC_INSERT) , LCTL(KC_Z)     , KC_HOME          , KC_END   , LSFT(KC_INSERT) , KC_PGUP ,
-  KC_NO         , OSL(_APP)   , OSL(_VIMIDEA)          , KC_DELETE                           , KC_NO      , KC_NO    /*              ,                         , */       , KC_LEFT         , KC_DOWN        , KC_UP            , KC_RIGHT , LALT(KC_DOWN)   , KC_PGDN ,
-  KC_LSHIFT     , KC_NO       , LCTL(KC_X)     , KC_DELETE                           , KC_LSFT    , LCTL(KC_LEFT)            , OSL(_APP)               , KC_BSPC  , KC_F3           , KC_APPLICATION , LSFT(KC_TAB)     , KC_TAB   , LCTL(KC_F)      , KC_ENT  ,
-   /*           ,             ,                , */                          KC_LALT , KC_LCTRL   , OSL(_DBGL)  , KC_F23/*autocomplete*/ , KC_ENTER , KC_RSHIFT       , LCTL(KC_ENT)   , LALT(KC_ENT) /* ,          , */
+  OSL(_APP)     , KC_NO       , KC_NO          , MO(_DBGL)                          , KC_NO      , KC_NO         /*         ,                         , */       , KC_HOME         , KC_PGDN        , KC_PGUP          , KC_END   , KC_NO           , KC_DEL  ,
+  ST_MACRO_LCBR , TO(_QWERTY) , LCTL(KC_RIGHT) , LCTL(KC_RIGHT)                      , LCTL(KC_Y) , KC_NO         /* ,                         , */       , LCTL(KC_INSERT) , LCTL(KC_Z)     , KC_HOME          , KC_END   , LSFT(KC_INSERT) , KC_PGUP ,
+  KC_NO         , OSL(_APP)   , OSL(_VIMIDEA)          , KC_DELETE                           , KC_NO      , KC_NO    /*              ,                         , */       , KC_LEFT         , KC_DOWN        , KC_UP            , KC_RIGHT , OSL(_VIMIDEA)   , KC_PGDN ,
+  KC_LSHIFT     , KC_NO       , LCTL(KC_X)     , KC_DELETE                           , KC_LSFT    , LCTL(KC_LEFT)            , KC_DEL               , KC_BSPC  , KC_F3           , KC_APPLICATION , LSFT(KC_TAB)     , KC_TAB   , LCTL(KC_F)      , KC_ENT  ,
+   /*           ,             ,                , */                          KC_LALT , KC_LCTRL   , KC_NO  , KC_F23/*autocomplete*/ , KC_ENTER , KC_F23/*autocomplete*/       , LCTL(KC_ENT)   , LALT(KC_ENT) /* ,          , */
   )                                  ,
 
   [_VIMIDEA] = LAYOUT(
     KC_F12        , KC_F1      , KC_F2      , KC_F3                                , KC_F4       , KC_F5        /* ,            , */     , KC_F6        , KC_F7    , KC_F8         , KC_F9       , KC_F10                 , KC_F11        ,
     ST_MACRO_LCBR , ST_MACRO_1 , ST_MACRO_2 , ST_MACRO_3                           , ST_MACRO_4  , ST_MACRO_5   /* ,            , */     , ST_MACRO_15  , KC_NO    , KC_NO         , ST_MACRO_16 , ST_MACRO_PASTE_HISTORY , ST_MACRO_RCBR ,
     KC_NO         , ST_MACRO_6 , ST_MACRO_7 , KC_NO                                , ST_MACRO_9  , KC_NO        /* ,            , */     , KC_NO        , KC_NO    , KC_NO         , KC_NO       , ST_MACRO_SCLN_END      , KC_NO         ,
-    KC_CAPS       , KC_NO      , KC_NO      , ST_MACRO_10                          , ST_MACRO_11 , ST_MACRO_31     , KC_NO      , KC_NO  , KC_NO        , KC_NO    , LALT(KC_DOWN) , KC_NO       , ST_MACRO_VIM_SEARCH    , KC_RSHIFT     ,
+    KC_CAPS       , KC_NO      , KC_NO      , ST_MACRO_10                          , ST_MACRO_11 , ST_MACRO_31     , KC_NO      , KC_NO  , KC_NO        , KC_NO    , LALT(KC_UP) , LALT(KC_DOWN)       , ST_MACRO_VIM_SEARCH    , KC_RSHIFT     ,
              /*   ,            ,            , */ RGUI(KC_SPACE)/*Change_language*/ , KC_CAPS     , MO(_APP)        , ST_MACRO_5 , KC_SPC , MO(_VIMIDEA) , KC_RCTRL , KC_LALT /*    ,             , */
   ),
   /* [_VIMIDEA] = LAYOUT( */
@@ -610,8 +624,8 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
     LCTL(KC_F4)                , LALT(LCTL(LSFT(KC_Q))) , LALT(LCTL(LSFT(KC_W))) , LALT(LCTL(LSFT(KC_E))) , LALT(LCTL(LSFT(KC_R))) , LCTL(LGUI(KC_5))         /* ,              , */            , LALT(LCTL(LSFT(KC_Y))) , LCTL(LGUI(KC_8))       , LCTL(LGUI(KC_1))     , LCTL(LGUI(KC_5))                  , LALT(LCTL(LSFT(KC_P))) , LCTL(KC_F4)   ,
     LCTL(KC_F4)                , LALT(LCTL(LSFT(KC_Q))) , LALT(LCTL(LSFT(KC_W))) , LALT(LCTL(LSFT(KC_E))) , LALT(LCTL(LSFT(KC_R))) , LCTL(LGUI(KC_5))         /* ,              , */            , LALT(LCTL(LSFT(KC_Y))) , LCTL(LGUI(KC_8))       , LCTL(LGUI(KC_1))     , LCTL(LGUI(KC_5))                  , LALT(LCTL(LSFT(KC_P))) , LGUI(KC_UP)   ,
     LGUI(KC_TAB)               , RCTL(KC_ESC)/*Windows_key*/            , LCTL(LGUI(KC_8))       , LALT(LCTL(LSFT(KC_D))) , LCTL(LGUI(KC_7))       , LALT(LCTL(LSFT(KC_G)))   /* ,              , */            , LCTL(LGUI(KC_4))       , LALT(LCTL(LSFT(KC_J))) , LCTL(LGUI(KC_3))     , RGUI(KC_SPACE)/*Change_language*/ , LCTL(LGUI(KC_2))       , LGUI(KC_DOWN) ,
-    LALT(LCTL(KC_PSCREEN))     , OSM(MOD_RGUI) , LCTL(LGUI(KC_9))       , LALT(LCTL(LSFT(KC_C))) , LALT(LCTL(LSFT(KC_V))) , LALT(LCTL(LSFT(KC_B)))      , LALT(KC_F4)      , OSM(MOD_RGUI) , LALT(LCTL(LSFT(KC_N))) , LCTL(LGUI(KC_6))       , LALT(KC_TAB)         , LALT(KC_GRAVE)                    , LCTL(LGUI(KC_0))       , KC_PSCREEN    ,
-                            /* ,                        ,                        , */ LALT(KC_MINUS)      , LALT(KC_EQUAL)         , KC_TRANSPARENT              , LGUI(KC_TAB) , KC_NO         , KC_TRANSPARENT         , KC_AUDIO_VOL_DOWN      , KC_AUDIO_VOL_DOWN /* ,                                   , */
+    LALT(LCTL(KC_PSCREEN))     , OSM(MOD_RGUI) , LCTL(LGUI(KC_9))       , LALT(LCTL(LSFT(KC_C))) , LALT(LCTL(LSFT(KC_V))) , LALT(LCTL(LSFT(KC_B)))      , LALT(KC_F4)      , LCTL(KC_F4) , LALT(LCTL(LSFT(KC_N))) , LCTL(LGUI(KC_6))       , LALT(KC_TAB)         , LALT(KC_GRAVE)                    , LCTL(LGUI(KC_0))       , KC_PSCREEN    ,
+                            /* ,                        ,                        , */ LALT(KC_MINUS)      , LALT(KC_EQUAL)         , KC_TRANSPARENT              , LGUI(KC_TAB) , KC_NO         , KC_TRANSPARENT         , KC_AUDIO_VOL_UP      , KC_AUDIO_VOL_DOWN /* ,                                   , */
   ),
   // Debug
   // RALT(KC_X) on the right control is to switch xdebug on browsers. I always forget the shortcup. Let it be on the debug layer
@@ -1969,6 +1983,8 @@ uint16_t get_tapping_term(uint16_t keycode, keyrecord_t *record) {
             return 2000;
         case OSL(_DBGL):
             return 2000;
+        /* case LT(_NAV, KC_F13): */
+        /*     return 150; */
         /* case OSL(_SHIFT): */
         /*     /1* return 300; *1/ */
         /*     return 230; */
