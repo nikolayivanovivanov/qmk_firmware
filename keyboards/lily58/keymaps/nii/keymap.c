@@ -134,9 +134,9 @@ enum custom_keycodes {
 };
 
 // Lag and leads to unwanted layer switches
-enum combos {
-  SS_LAYER,
-  SS_LAYER_R,
+// enum combos {
+//   SS_LAYER,
+//   SS_LAYER_R,
 //   SSP_LAYER,
 //   SSP_LAYER_R
   /* WE_LAYER_APP, */
@@ -144,10 +144,10 @@ enum combos {
   /* XC_LAYER_DEBUG, */
   /* IO_LAYER_APP_R, */
   /* KL_LAYER_VIMIDEA_R */
-};
+// };
 
-const uint16_t PROGMEM ss_combo[] = {KC_LSHIFT, KC_RSHIFT, COMBO_END};
-const uint16_t PROGMEM ss_combo_r[] = {KC_RSHIFT, KC_LSHIFT, COMBO_END};
+// const uint16_t PROGMEM ss_combo[] = {KC_LSHIFT, KC_RSHIFT, COMBO_END};
+// const uint16_t PROGMEM ss_combo_r[] = {KC_RSHIFT, KC_LSHIFT, COMBO_END};
 // const uint16_t PROGMEM ssp_combo[] = {KC_LSHIFT, KC_LSPO, COMBO_END};
 // const uint16_t PROGMEM ssp_combo_r[] = {KC_RSHIFT, KC_RSPC, COMBO_END};
 
@@ -157,55 +157,55 @@ const uint16_t PROGMEM ss_combo_r[] = {KC_RSHIFT, KC_LSHIFT, COMBO_END};
 /* const uint16_t PROGMEM io_combo[] = {KC_I, KC_O, COMBO_END}; */
 /* const uint16_t PROGMEM kl_combo[] = {KC_K, KC_L, COMBO_END}; */
 
-combo_t key_combos[COMBO_COUNT] = {
-  [SS_LAYER] = COMBO_ACTION(ss_combo),
-  [SS_LAYER_R] = COMBO_ACTION(ss_combo_r),
-//   [SSP_LAYER] = COMBO_ACTION(ssp_combo),
-//   [SSP_LAYER_R] = COMBO_ACTION(ssp_combo_r)
-  /* [WE_LAYER_APP] = COMBO_ACTION(we_combo), */
-  /* [IO_LAYER_APP_R] = COMBO_ACTION(io_combo), */
-  /* [SD_LAYER_VIMIDEA] = COMBO_ACTION(sd_combo), */
-  /* [KL_LAYER_VIMIDEA_R] = COMBO_ACTION(kl_combo), */
-  /* [XC_LAYER_DEBUG] = COMBO_ACTION(xc_combo) */
-};
+// combo_t key_combos[COMBO_COUNT] = {
+//   [SS_LAYER] = COMBO_ACTION(ss_combo),
+//   [SS_LAYER_R] = COMBO_ACTION(ss_combo_r),
+// //   [SSP_LAYER] = COMBO_ACTION(ssp_combo),
+// //   [SSP_LAYER_R] = COMBO_ACTION(ssp_combo_r)
+//   /* [WE_LAYER_APP] = COMBO_ACTION(we_combo), */
+//   /* [IO_LAYER_APP_R] = COMBO_ACTION(io_combo), */
+//   /* [SD_LAYER_VIMIDEA] = COMBO_ACTION(sd_combo), */
+//   /* [KL_LAYER_VIMIDEA_R] = COMBO_ACTION(kl_combo), */
+//   /* [XC_LAYER_DEBUG] = COMBO_ACTION(xc_combo) */
+// };
 
-void process_combo_event(uint16_t combo_index, bool pressed) {
-  switch(combo_index) {
-    case SS_LAYER:
-    case SS_LAYER_R:
-    /* case WE_LAYER_APP: */
-    /* case IO_LAYER_APP_R: */
-      if (pressed) {
-          layer_clear();
-          layer_on(_APP);
-      } else {
-          layer_clear();
-          layer_on(_QWERTY);
-      }
-      break;
-    // case SSP_LAYER:
-    // case SSP_LAYER_R:
-    // // case SD_LAYER_VIMIDEA:
-    // // case KL_LAYER_VIMIDEA_R:
-    //   if (pressed) {
-    //       layer_clear();
-    //       layer_on(_VIMIDEA);
-    //   } else {
-    //       layer_clear();
-    //       layer_on(_QWERTY);
-    //   }
-    //   break;
-    /* case XC_LAYER_DEBUG: */
-    /*   if (pressed) { */
-    /*       layer_clear(); */
-    /*       layer_on(_DBGL); */
-    /*   } else { */
-    /*       layer_clear(); */
-    /*       layer_on(_QWERTY); */
-    /*   } */
-    /*   break; */
-  }
-}
+// void process_combo_event(uint16_t combo_index, bool pressed) {
+//   switch(combo_index) {
+//     case SS_LAYER:
+//     case SS_LAYER_R:
+//     /* case WE_LAYER_APP: */
+//     /* case IO_LAYER_APP_R: */
+//       if (pressed) {
+//           layer_clear();
+//           layer_on(_APP);
+//       } else {
+//           layer_clear();
+//           layer_on(_QWERTY);
+//       }
+//       break;
+//     // case SSP_LAYER:
+//     // case SSP_LAYER_R:
+//     // // case SD_LAYER_VIMIDEA:
+//     // // case KL_LAYER_VIMIDEA_R:
+//     //   if (pressed) {
+//     //       layer_clear();
+//     //       layer_on(_VIMIDEA);
+//     //   } else {
+//     //       layer_clear();
+//     //       layer_on(_QWERTY);
+//     //   }
+//     //   break;
+//     /* case XC_LAYER_DEBUG: */
+//     /*   if (pressed) { */
+//     /*       layer_clear(); */
+//     /*       layer_on(_DBGL); */
+//     /*   } else { */
+//     /*       layer_clear(); */
+//     /*       layer_on(_QWERTY); */
+//     /*   } */
+//     /*   break; */
+//   }
+// }
 // Tap Dance '' becomes ''arrowLeft
 void dance_quot_finished(qk_tap_dance_state_t *state, void *user_data) {
     if (state->count == 1) {
@@ -567,9 +567,9 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 
   // vim normal
  [_NAV] = LAYOUT(
-  KC_NO     , KC_NO       , KC_NO          , MO(_DBGL)                          , KC_NO      , KC_NO         /*         ,                         , */       , KC_HOME         , KC_PGDN        , KC_PGUP          , KC_END   , KC_NO           , KC_NO  ,
+  KC_NO     , KC_NO       , KC_NO          , MO(_DBGL)                          , KC_END      , KC_NO         /*         ,                         , */       , KC_HOME         , KC_PGDN        , KC_PGUP          , KC_END   , KC_NO           , KC_NO  ,
   KC_NO , TO(_QWERTY) , LCTL(KC_RIGHT) , LCTL(KC_RIGHT)                      , LCTL(KC_Y) , KC_NO         /* ,                         , */       , LCTL(KC_INSERT) , LCTL(KC_Z)     , KC_HOME          , KC_END   , LSFT(KC_INSERT) , KC_NO ,
-  KC_NO         , OSL(_APP)   , OSL(_VIMIDEA)          , KC_DELETE                           , KC_NO      , KC_NO    /*              ,                         , */       , KC_LEFT         , KC_DOWN        , KC_UP            , KC_RIGHT , OSL(_VIMIDEA)   , ST_MACRO_31 ,
+  KC_NO         , OSL(_APP)   , KC_NO          , KC_DELETE                           , KC_NO      , KC_NO    /*              ,                         , */       , KC_LEFT         , KC_DOWN        , KC_UP            , KC_RIGHT , OSL(_VIMIDEA)   , ST_MACRO_31 ,
   KC_LSHIFT     , KC_NO       , LCTL(KC_X)     , KC_DELETE                           , KC_LSFT    , LCTL(KC_LEFT)            , KC_DEL               , KC_BSPC  , KC_F3           , KC_APPLICATION , LSFT(KC_TAB)     , KC_TAB   , LCTL(KC_F)      , KC_NO  ,
    /*           ,             ,                , */                          KC_LALT , KC_LCTRL   , KC_NO  , KC_F23/*autocomplete*/ , KC_ENTER , KC_F23/*autocomplete*/       , LCTL(KC_ENT)   , LALT(KC_ENT) /* ,          , */
   )                                  ,
@@ -1011,10 +1011,13 @@ switch (keycode) {
         unregister_code16(KC_RBRC);
         add_last_key(KC_RBRC);
         if (timer_elapsed(lbrk_key_timer) < 5 * TAPPING_TERM && last_keys[0] == KC_RBRC && last_keys[1] == KC_LBRC) {
-            clear_mods();
+            uint8_t current_mods = keyboard_report->mods;
+            del_mods(keyboard_report->mods);
+            // clear_mods();
             tap_code(KC_LEFT);
             add_last_key(KC_LEFT);
             rbrk_key_timer = timer_read();
+            add_mods(current_mods);
         }
     }
     break;
@@ -1090,10 +1093,13 @@ switch (keycode) {
                 add_last_key(KC_LEFT);
             } else{
                 // Dougle quotes
-                clear_mods();
+                uint8_t current_mods = keyboard_report->mods;
+                // clear_mods();
+                del_mods(keyboard_report->mods);
                 /* clear_macro_mods(); */
                 tap_code(KC_LEFT);
                 add_last_key(KC_LEFT);
+                add_mods(current_mods);
              }
         } else {
             quot_key_timer = timer_read();
