@@ -97,6 +97,7 @@ enum custom_keycodes {
     ST_MACRO_PASTE_HISTORY,
     ST_MACRO_EXT_SEL,
     ST_MACRO_EM,
+    ST_SEMIM,
     /* ST_MACRO_18, */
     /* ST_MACRO_19, */
     /* ST_MACRO_20, */
@@ -569,7 +570,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
  [_NAV] = LAYOUT(
   KC_NO     , KC_NO       , KC_NO          , MO(_DBGL)                          , KC_END      , KC_NO         /*         ,                         , */       , KC_HOME         , KC_PGDN        , KC_PGUP          , KC_END   , KC_NO           , KC_NO  ,
   KC_NO , TO(_QWERTY) , LCTL(KC_RIGHT) , LCTL(KC_RIGHT)                      , LCTL(KC_Y) , KC_NO         /* ,                         , */       , LCTL(KC_INSERT) , LCTL(KC_Z)     , KC_HOME          , KC_END   , LSFT(KC_INSERT) , KC_NO ,
-  KC_NO         , OSL(_APP)   , KC_NO          , KC_DELETE                           , KC_NO      , KC_NO    /*              ,                         , */       , KC_LEFT         , KC_DOWN        , KC_UP            , KC_RIGHT , OSL(_VIMIDEA)   , ST_MACRO_31 ,
+  KC_NO         , OSL(_APP)   , OSL(_VIMIDEA)          , KC_DELETE                           , KC_NO      , KC_NO    /*              ,                         , */       , KC_LEFT         , KC_DOWN        , KC_UP            , KC_RIGHT , ST_SEMIM   , ST_MACRO_31 ,
   KC_LSHIFT     , KC_NO       , LCTL(KC_X)     , KC_DELETE                           , KC_LSFT    , LCTL(KC_LEFT)            , KC_DEL               , KC_BSPC  , KC_F3           , KC_APPLICATION , LSFT(KC_TAB)     , KC_TAB   , LCTL(KC_F)      , KC_NO  ,
    /*           ,             ,                , */                          KC_LALT , KC_LCTRL   , KC_NO  , KC_F23/*autocomplete*/ , KC_ENTER , KC_F23/*autocomplete*/       , LCTL(KC_ENT)   , LALT(KC_ENT) /* ,          , */
   )                                  ,
@@ -1336,6 +1337,11 @@ switch (keycode) {
     case ST_MACRO_PASTE_HISTORY:
     if (record->event.pressed) {
       SEND_STRING(SS_LSFT(SS_TAP(X_SCOLON)) SS_DELAY(300) "YRShow" SS_TAP(X_ENTER));
+    }
+    break;
+    case ST_SEMIM:
+    if (record->event.pressed) {
+      SEND_STRING(SS_LCTL(SS_TAP(X_LBRACKET))SS_LSFT(SS_TAP(X_SCOLON)) SS_DELAY(300) "M");
     }
     break;
     case ST_MACRO_EXT_SEL:
