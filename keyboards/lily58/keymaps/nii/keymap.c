@@ -138,25 +138,25 @@ enum custom_keycodes {
 // enum combos {
 //   SS_LAYER,
 //   SS_LAYER_R,
-//   SSP_LAYER,
-//   SSP_LAYER_R
-  /* WE_LAYER_APP, */
-  /* SD_LAYER_VIMIDEA, */
-  /* XC_LAYER_DEBUG, */
-  /* IO_LAYER_APP_R, */
-  /* KL_LAYER_VIMIDEA_R */
+// //   SSP_LAYER,
+// //   SSP_LAYER_R
+//   /* WE_LAYER_APP, */
+//   /* SD_LAYER_VIMIDEA, */
+//   /* XC_LAYER_DEBUG, */
+//   /* IO_LAYER_APP_R, */
+//   /* KL_LAYER_VIMIDEA_R */
 // };
 
 // const uint16_t PROGMEM ss_combo[] = {KC_LSHIFT, KC_RSHIFT, COMBO_END};
 // const uint16_t PROGMEM ss_combo_r[] = {KC_RSHIFT, KC_LSHIFT, COMBO_END};
-// const uint16_t PROGMEM ssp_combo[] = {KC_LSHIFT, KC_LSPO, COMBO_END};
-// const uint16_t PROGMEM ssp_combo_r[] = {KC_RSHIFT, KC_RSPC, COMBO_END};
+// // const uint16_t PROGMEM ssp_combo[] = {KC_LSHIFT, KC_LSPO, COMBO_END};
+// // const uint16_t PROGMEM ssp_combo_r[] = {KC_RSHIFT, KC_RSPC, COMBO_END};
 
-/* const uint16_t PROGMEM we_combo[] = {KC_W, KC_E, COMBO_END}; */
-/* const uint16_t PROGMEM sd_combo[] = {KC_S, KC_D, COMBO_END}; */
-/* const uint16_t PROGMEM xc_combo[] = {KC_X, KC_C, COMBO_END}; */
-/* const uint16_t PROGMEM io_combo[] = {KC_I, KC_O, COMBO_END}; */
-/* const uint16_t PROGMEM kl_combo[] = {KC_K, KC_L, COMBO_END}; */
+// /* const uint16_t PROGMEM we_combo[] = {KC_W, KC_E, COMBO_END}; */
+// /* const uint16_t PROGMEM sd_combo[] = {KC_S, KC_D, COMBO_END}; */
+// /* const uint16_t PROGMEM xc_combo[] = {KC_X, KC_C, COMBO_END}; */
+// /* const uint16_t PROGMEM io_combo[] = {KC_I, KC_O, COMBO_END}; */
+// /* const uint16_t PROGMEM kl_combo[] = {KC_K, KC_L, COMBO_END}; */
 
 // combo_t key_combos[COMBO_COUNT] = {
 //   [SS_LAYER] = COMBO_ACTION(ss_combo),
@@ -172,6 +172,14 @@ enum custom_keycodes {
 
 // void process_combo_event(uint16_t combo_index, bool pressed) {
 //   switch(combo_index) {
+//     // case SS_LAYER:
+//     // case SS_LAYER_R:
+//     //   if (pressed) {
+//     //       register_code16(KC_F23);
+//     //   } else {
+//     //       unregister_code16(KC_F23);
+//     //   }
+//     //   break;
 //     case SS_LAYER:
 //     case SS_LAYER_R:
 //     /* case WE_LAYER_APP: */
@@ -229,7 +237,13 @@ void dance_quot_reset(qk_tap_dance_state_t *state, void *user_data) {
         /* SEND_STRING(SS_DELAY(4000) SS_TAP(X_LEFT)); */
         /* UP(KC_LSFT); */
         /* SEND_STRING( SS_TAP(X_LEFT)); */
+        uint8_t current_mods = keyboard_report->mods;
+        del_mods(keyboard_report->mods);
+        // clear_mods();
         tap_code(KC_LEFT);
+        // add_last_key(KC_LEFT);
+        add_mods(current_mods);
+        // tap_code(KC_LEFT);
     }
 }
 
@@ -562,18 +576,18 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
   TD(TD_ESC_F13)                  , KC_1 , KC_2 , KC_3                      , KC_4           , KC_5       /* ,                , */      , KC_6      , KC_7            , KC_8            , KC_9   , KC_0    , KC_BSPC       ,
   ST_MACRO_LBRK           , KC_Q , KC_W , KC_E                      , KC_R           , KC_T      /*  ,                , */      , KC_Y      , KC_U            , KC_I            , KC_O   , KC_P    , ST_MACRO_RBRK ,
   ST_MACRO_GRAVE          , KC_A , KC_S , KC_D                      , KC_F           , KC_G     /*   ,                , */      , KC_H      , KC_J            , KC_K            , KC_L   , KC_SCLN , ST_MACRO_QUOT ,
-  KC_LSPO                 , KC_Z , KC_X , KC_C                      , KC_V           , KC_B          , LT(_VIMIDEA, KC_END) , LT(_VIMIDEA, KC_HOME) , KC_N      , KC_M            , KC_COMM         , KC_DOT , KC_SLSH , KC_RSPC       ,
+  KC_LSPO                 , KC_Z , KC_X , KC_C                      , KC_V           , KC_B          , LT(_VIMIDEA, KC_END) , LT(_VIMIDEA, KC_HOME) , KC_N      , KC_M            , KC_COMM         , KC_DOT , KC_SLSH , KC_SFTENT       ,
                        /* ,      ,      , */      LALT_T(KC_EXLM) , LCTL_T(KC_EQL) , KC_LSHIFT     , MO(_NAV)       , KC_SPC  , KC_RSHIFT , RCTL_T(KC_MINS) , LALT_T(KC_BSLASH) /* ,        , */
 ),
 
   // vim normal
  [_NAV] = LAYOUT(
   KC_NO     , KC_NO       , KC_NO          , MO(_DBGL)                          , KC_END      , KC_NO         /*         ,                         , */       , KC_HOME         , KC_PGDN        , KC_PGUP          , KC_END   , KC_NO           , KC_DEL  ,
-  KC_NO , TO(_QWERTY) , LCTL(KC_RIGHT) , LCTL(KC_RIGHT)                      , LCTL(KC_Y) , KC_NO         /* ,                         , */       , LCTL(KC_INSERT) , LCTL(KC_Z)     , KC_HOME          , KC_END   , LSFT(KC_INSERT) , KC_NO ,
+  KC_NO , TO(_QWERTY) , LCTL(KC_RIGHT) , LCTL(KC_RIGHT)                      , LCTL(KC_Y) , KC_NO         /* ,                         , */       , LCTL(KC_INSERT) , LCTL(KC_Z)     , KC_HOME          , KC_END   , LSFT(KC_INSERT) , ST_MACRO_31 ,
 //   KC_NO         , OSL(_APP)   , OSL(_VIMIDEA)          , KC_DELETE                           , KC_NO      , KC_NO    /*              ,                         , */       , KC_LEFT         , KC_DOWN        , KC_UP            , KC_RIGHT , OSL(_VIMIDEA)   , ST_MACRO_31 ,
-  KC_NO         , OSL(_APP)   , OSL(_VIMIDEA)          , KC_DELETE                           , KC_NO      , KC_NO    /*              ,                         , */       , KC_LEFT         , KC_DOWN        , KC_UP            , KC_RIGHT , ST_SEMIM   , ST_MACRO_31 ,
-  KC_LSHIFT     , KC_NO       , LCTL(KC_X)     , KC_DELETE                           , KC_LSFT    , LCTL(KC_LEFT)            , LCTL(KC_ENTER)               , KC_ENTER  , KC_F3           , KC_APPLICATION , LSFT(KC_TAB)     , KC_TAB   , LCTL(KC_F)      , KC_NO  ,
-   /*           ,             ,                , */                          KC_LALT , KC_LCTRL   , KC_NO  , KC_F23/*autocomplete*/ , LT(_APP, KC_ENTER) , KC_F23/*autocomplete*/       , LCTL(KC_ENT)   , LALT(KC_ENT) /* ,          , */
+  KC_NO         , OSL(_APP)   , OSL(_VIMIDEA)          , KC_DELETE                           , KC_NO      , KC_NO    /*              ,                         , */       , KC_LEFT         , KC_DOWN        , KC_UP            , KC_RIGHT , ST_SEMIM   , KC_NO ,
+  KC_LSHIFT     , KC_NO       , LCTL(KC_X)     , KC_DELETE                           , KC_LSFT    , LCTL(KC_LEFT)            , KC_END               , KC_HOME  , KC_F3           , KC_APPLICATION , LSFT(KC_TAB)     , KC_TAB   , LCTL(KC_F)      , KC_ENTER  ,
+   /*           ,             ,                , */                          KC_LALT , KC_LCTRL   , KC_NO  , KC_F23/*autocomplete*/ , MO(_APP) , KC_F23/*autocomplete*/       , LCTL(KC_ENT)   , LALT(KC_ENT) /* ,          , */
   )                                  ,
 
   [_VIMIDEA] = LAYOUT(
@@ -635,8 +649,8 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
   [_DBGL] = LAYOUT(
           KC_NO , KC_NO , KC_NO , KC_NO     , KC_NO , KC_NO  /*      ,             , */    , ST_MACRO_14 , KC_NO                , KC_F11             , KC_F10 , KC_NO , KC_NO ,
           KC_NO , KC_NO , KC_NO , KC_NO     , KC_NO , KC_NO  /*      ,             , */    , ST_MACRO_14 , KC_NO                , KC_F11             , KC_F10 , KC_NO , KC_NO ,
-          KC_NO , KC_NO , KC_NO , KC_NO     , KC_NO , KC_NO     /*   ,             , */    , KC_HOME     , KC_PGDOWN            , KC_PGUP            , KC_END , KC_NO , KC_NO ,
-          KC_NO , KC_NO , KC_NO , KC_NO     , KC_NO , KC_NO          , TO(_QWERTY) , KC_NO , KC_NO       , KC_NO                , KC_NO              , KC_NO  , KC_NO , KC_NO ,
+          KC_NO , KC_NO , KC_NO , KC_NO     , KC_NO , KC_NO     /*   ,             , */    , KC_LEFT     , KC_DOWN            , KC_UP            , KC_RIGHT , KC_NO , KC_NO ,
+          KC_NO , KC_NO , KC_NO , KC_NO     , KC_NO , KC_NO          , TO(_QWERTY) , KC_NO , KC_NO       , KC_NO                , KC_NO              , KC_NO  , KC_NO , KC_F8 ,
         /*      ,       ,       , */  KC_NO , KC_NO , KC_TRANSPARENT , KC_LSHIFT   , KC_F8 , KC_NO       , ST_MACRO_START_DEBUG , RALT(LSFT(KC_X)) /* ,        , */
   )
 };
@@ -829,6 +843,7 @@ bool arr_ac_enabled = false;
 bool com_ac_enabled = false;
 bool con_ac_enabled = false;
 bool int_ac_enabled = false;
+bool ins_ac_enabled = false;
 bool mus_ac_enabled = false;
 bool ill_ac_enabled = false;
 bool nii_ac_enabled = false;
@@ -1702,6 +1717,9 @@ switch (keycode) {
           } else if ((last_keys[2] == KC_I && last_keys[1] == KC_N && last_keys[0] == KC_T) || (last_keys[2] == LSFT(KC_I) && last_keys[1] == KC_N && last_keys[0] == KC_T)) {
           /* bool int_ac_enabled = false; */
               int_ac_enabled = true;
+          } else if ((last_keys[2] == KC_I && last_keys[1] == KC_N && last_keys[0] == KC_S) || (last_keys[2] == LSFT(KC_I) && last_keys[1] == KC_N && last_keys[0] == KC_S)) {
+          /* bool ins_ac_enabled = false; */
+              ins_ac_enabled = true;
           } else if (last_keys[2] == KC_N && last_keys[1] == KC_I && last_keys[0] == KC_I) {
           /* bool nii_ac_enabled = false; */
               nii_ac_enabled = true;
@@ -1742,6 +1760,7 @@ switch (keycode) {
               com_ac_enabled  = false;
               con_ac_enabled  = false;
               int_ac_enabled  = false;
+              ins_ac_enabled  = false;
               mus_ac_enabled  = false;
               nii_ac_enabled  = false;
               ill_ac_enabled  = false;
@@ -1803,6 +1822,9 @@ switch (keycode) {
               ac_is_something_enabled = true;
           } else if (int_ac_enabled == true) {
               SEND_STRING("erpretation");
+              ac_is_something_enabled = true;
+          } else if (ins_ac_enabled == true) {
+              SEND_STRING("trument");
               ac_is_something_enabled = true;
           } else if (mus_ac_enabled == true) {
               SEND_STRING("icalion");
@@ -1870,6 +1892,7 @@ switch (keycode) {
               com_ac_enabled  = false;
               con_ac_enabled  = false;
               int_ac_enabled  = false;
+              ins_ac_enabled  = false;
               mus_ac_enabled  = false;
               nii_ac_enabled  = false;
               ill_ac_enabled = false;
