@@ -76,6 +76,7 @@ enum custom_keycodes {
     /* ST_MACRO_CAPSLOCK, */
     ST_MACRO_CTRL_OR_BRACKET,
     ST_MACRO_RALT_OR_RBRACKET,
+    ST_MACRO_STRUCT,
     ST_MACRO_0,
     ST_MACRO_1,
     ST_MACRO_2,
@@ -98,6 +99,8 @@ enum custom_keycodes {
     ST_MACRO_EXT_SEL,
     ST_MACRO_EM,
     ST_SEMIM,
+    ST_MACRO_ARROW,
+    ST_MACRO_EQ_ARROW,
     /* ST_MACRO_18, */
     /* ST_MACRO_19, */
     /* ST_MACRO_20, */
@@ -574,10 +577,11 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 
  [_QWERTY] = LAYOUT(
   TD(TD_ESC_F13)                  , KC_1 , KC_2 , KC_3                      , KC_4           , KC_5       /* ,                , */      , KC_6      , KC_7            , KC_8            , KC_9   , KC_0    , KC_BSPC       ,
+//   KC_LBRACKET           , KC_Q , KC_W , KC_E                      , KC_R           , KC_T      /*  ,                , */      , KC_Y      , KC_U            , KC_I            , KC_O   , KC_P    , KC_RBRACKET ,
   ST_MACRO_LBRK           , KC_Q , KC_W , KC_E                      , KC_R           , KC_T      /*  ,                , */      , KC_Y      , KC_U            , KC_I            , KC_O   , KC_P    , ST_MACRO_RBRK ,
-  ST_MACRO_GRAVE          , KC_A , KC_S , KC_D                      , KC_F           , KC_G     /*   ,                , */      , KC_H      , KC_J            , KC_K            , KC_L   , KC_SCLN , ST_MACRO_QUOT ,
-  KC_LSPO                 , KC_Z , KC_X , KC_C                      , KC_V           , KC_B          , LT(_VIMIDEA, KC_END) , LT(_VIMIDEA, KC_HOME) , KC_N      , KC_M            , KC_COMM         , KC_DOT , KC_SLSH , KC_SFTENT       ,
-                       /* ,      ,      , */      LALT_T(KC_EXLM) , LCTL_T(KC_EQL) , KC_LSHIFT     , MO(_NAV)       , KC_SPC  , KC_RSHIFT , RCTL_T(KC_MINS) , LALT_T(KC_BSLASH) /* ,        , */
+  ST_MACRO_GRAVE          , KC_A , KC_S , KC_D                      , KC_F           , KC_G     /*   ,                , */      , KC_H      , KC_J            , KC_K            , KC_L   , KC_SCOLON , ST_MACRO_QUOT ,
+  LSFT_T(KC_F13)                 , KC_Z , KC_X , KC_C                      , KC_V           , KC_B          , LT(_VIMIDEA, KC_ENTER) , LT(_VIMIDEA, KC_HOME) , KC_N      , KC_M            , KC_COMM         , ST_MACRO_DOT , KC_SLSH , RSFT_T(KC_END)       ,
+                       /* ,      ,      , */      LALT_T(KC_BSLASH) , KC_LCTRL , KC_LSHIFT     , MO(_NAV)       , KC_SPC  , KC_RSHIFT , RCTL_T(KC_MINS) , LALT_T(KC_EQL) /* ,        , */
 ),
 
   // vim normal
@@ -586,16 +590,16 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
   KC_NO , TO(_QWERTY) , LCTL(KC_RIGHT) , LCTL(KC_RIGHT)                      , LCTL(KC_Y) , KC_NO         /* ,                         , */       , LCTL(KC_INSERT) , LCTL(KC_Z)     , KC_HOME          , KC_END   , LSFT(KC_INSERT) , ST_MACRO_31 ,
 //   KC_NO         , OSL(_APP)   , OSL(_VIMIDEA)          , KC_DELETE                           , KC_NO      , KC_NO    /*              ,                         , */       , KC_LEFT         , KC_DOWN        , KC_UP            , KC_RIGHT , OSL(_VIMIDEA)   , ST_MACRO_31 ,
   KC_NO         , OSL(_APP)   , OSL(_VIMIDEA)          , KC_DELETE                           , KC_NO      , KC_NO    /*              ,                         , */       , KC_LEFT         , KC_DOWN        , KC_UP            , KC_RIGHT , ST_SEMIM   , KC_NO ,
-  KC_LSHIFT     , KC_NO       , LCTL(KC_X)     , KC_DELETE                           , KC_LSFT    , LCTL(KC_LEFT)            , KC_END               , KC_HOME  , KC_F3           , KC_APPLICATION , LSFT(KC_TAB)     , KC_TAB   , LCTL(KC_F)      , KC_ENTER  ,
-   /*           ,             ,                , */                          KC_LALT , KC_LCTRL   , KC_NO  , KC_F23/*autocomplete*/ , MO(_APP) , KC_F23/*autocomplete*/       , LCTL(KC_ENT)   , LALT(KC_ENT) /* ,          , */
+  KC_LSHIFT     , KC_NO       , LCTL(KC_X)     , KC_DELETE                           , KC_LSFT    , LCTL(KC_LEFT)            , KC_ENTER               , KC_HOME  , KC_F3           , KC_APPLICATION , LSFT(KC_TAB)     , KC_TAB   , LCTL(KC_F)      , KC_END  ,
+   /*           ,             ,                , */                          KC_LALT , KC_LCTRL   , KC_NO                    , KC_NO                  , MO(_APP) , KC_F23/*autocomplete*/       , ST_MACRO_ARROW , ST_MACRO_EQ_ARROW /* ,          , */
   )                                  ,
 
   [_VIMIDEA] = LAYOUT(
     KC_F12        , KC_F1      , KC_F2      , KC_F3                                , KC_F4       , KC_F5        /* ,            , */     , KC_F6        , KC_F7    , KC_F8         , KC_F9       , KC_F10                 , KC_F11        ,
     ST_MACRO_LCBR , ST_MACRO_1 , ST_MACRO_2 , ST_MACRO_3                           , ST_MACRO_4  , ST_MACRO_5   /* ,            , */     , ST_MACRO_15  , KC_NO    , KC_NO         , ST_MACRO_16 , ST_MACRO_PASTE_HISTORY , ST_MACRO_RCBR ,
-    KC_NO         , ST_MACRO_6 , ST_MACRO_7 , KC_NO                                , ST_MACRO_9  , KC_NO        /* ,            , */     , KC_NO        , KC_NO    , KC_NO         , KC_NO       , ST_MACRO_31      , KC_NO         ,
-    KC_CAPS       , KC_NO      , KC_NO      , ST_MACRO_10                          , ST_MACRO_11 , ST_MACRO_31     , KC_NO      , KC_NO  , KC_NO        , KC_NO    , LALT(KC_UP) , LALT(KC_DOWN)       , ST_MACRO_VIM_SEARCH    , KC_RSHIFT     ,
-             /*   ,            ,            , */ RGUI(KC_SPACE)/*Change_language*/ , KC_CAPS     , MO(_APP)        , ST_MACRO_5 , KC_SPC , MO(_VIMIDEA) , KC_RCTRL , KC_LALT /*    ,             , */
+    KC_NO         , ST_MACRO_6 , ST_MACRO_7 , KC_NO                                , ST_MACRO_9  , KC_NO        /* ,            , */     , KC_NO        , KC_NO    , KC_NO         , KC_NO       , ST_MACRO_SCLN_END      , KC_NO         ,
+    KC_CAPS       , KC_NO      , KC_NO      , ST_MACRO_10                          , ST_MACRO_11 , ST_MACRO_31     , ST_MACRO_STRUCT , ST_MACRO_STRUCT  , KC_NO        , KC_NO    , LALT(KC_UP) , LALT(KC_DOWN)       , ST_MACRO_VIM_SEARCH    , KC_RSHIFT     ,
+             /*   ,            ,            , */ RGUI(KC_SPACE)/*Change_language*/ , KC_CAPS     , MO(_APP)        , ST_MACRO_5 , KC_SPC , MO(_VIMIDEA) , ST_MACRO_ARROW , ST_MACRO_EQ_ARROW /*    ,             , */
   ),
   /* [_VIMIDEA] = LAYOUT( */
   /*   KC_F12                           ,  KC_F1     ,   KC_F2    , KC_F3       , KC_F4       , KC_F5                             , KC_F6       , KC_F7          , KC_F8         , KC_F9       , KC_F10                 ,  KC_F11    , */
@@ -871,6 +875,10 @@ void add_last_key(uint16_t keycode) {
     last_keys[0] = keycode;
 }
 
+void clear_last_keys(void) {
+    memset(last_keys, 0, sizeof(last_keys));
+}
+
 bool process_record_user(uint16_t keycode, keyrecord_t *record) {
   /* if (record->event.pressed) { */
 /* #ifdef OLED_DRIVER_ENABLE */
@@ -1062,6 +1070,7 @@ switch (keycode) {
             tap_code(KC_SCLN);
             tap_code(KC_LEFT);
             tap_code(KC_LEFT);
+            clear_last_keys();
         }
     }
     break;
@@ -1081,20 +1090,23 @@ switch (keycode) {
         register_code(KC_DOT);
     } else {
         unregister_code(KC_DOT);
-        add_last_key(KC_DOT);
-        // Check if the last 2 chars are . If yes, skip tthis to allow ...
+        // tap_code(last_keys[0]);
+        // tap_code(last_keys[1]);
+        // Check if the last 2 chars are . If yes, skip this to allow ...
+        // if ((keyboard_report->mods & MOD_MASK_SHIFT) == 0 && last_keys[1] != KC_DOT && last_keys[0] == KC_DOT) {
         if (timer_elapsed(dot_key_timer) < 3 * TAPPING_TERM && (keyboard_report->mods & MOD_MASK_SHIFT) == 0 && last_keys[1] != KC_DOT && last_keys[0] == KC_DOT) {
             tap_code(KC_LEFT);
             add_last_key(KC_LEFT);
         } else {
             if (timer_elapsed(dot_key_timer) < 6 * TAPPING_TERM && (keyboard_report->mods & MOD_MASK_SHIFT) == 0 && last_keys[1] == KC_DOT && last_keys[0] == KC_LEFT) {
-                // This is a thind . for a short time. Must be ... As after the second . we moved left, now move right to compensate
+                // This is a third . for a short time. Must be ... As after the second . we moved left, now move right to compensate
                 tap_code(KC_RIGHT);
                 add_last_key(KC_RIGHT);
             } else {
                 dot_key_timer = timer_read();
             }
         }
+        add_last_key(KC_DOT);
     }
     break;
     case ST_MACRO_QUOT:
@@ -1239,6 +1251,11 @@ switch (keycode) {
     /*   ralt_pressed = false; */
     /* } */
     /* break; */
+    case ST_MACRO_STRUCT:
+    if (record->event.pressed) {
+      SEND_STRING(SS_LCTL(SS_TAP(X_LBRACKET)) SS_DELAY(100) SS_LSFT(SS_TAP(X_SCOLON)) SS_DELAY(100) "MTs" SS_TAP(X_ENTER));
+    }
+    break;
     case ST_MACRO_0:
     if (record->event.pressed) {
       SEND_STRING(SS_LSFT(SS_TAP(X_SCOLON)) SS_DELAY(100) SS_LSFT(SS_TAP(X_M)) SS_DELAY(100) SS_LSFT(SS_TAP(X_T)));
@@ -1358,6 +1375,16 @@ switch (keycode) {
     case ST_SEMIM:
     if (record->event.pressed) {
       SEND_STRING(SS_LCTL(SS_TAP(X_LBRACKET))SS_LSFT(SS_TAP(X_SCOLON)) SS_DELAY(300) "M");
+    }
+    break;
+    case ST_MACRO_ARROW:
+    if (record->event.pressed) {
+      SEND_STRING("->");
+    }
+    break;
+    case ST_MACRO_EQ_ARROW:
+    if (record->event.pressed) {
+      SEND_STRING("=>");
     }
     break;
     case ST_MACRO_EXT_SEL:
@@ -1988,37 +2015,37 @@ uint16_t get_tapping_term(uint16_t keycode, keyrecord_t *record) {
         /*     return 85; */
         /* case LT(_NUML,KC_ENTER): */
         /*     return 180; */
-        case TD(TD_DOT):
-            return 180;
+        // case TD(TD_DOT):
+        //     return 180;
         /* case KC_QUOTE: */
         /* case KC_GRAVE: */
         /* case KC_SLASH: */
-        case TD(TD_QUOT):
-        case TD(TD_DQUOT):
-        case TD(TD_BQUOT):
-        case TD(TD_LBRACKET):
-        case TD(TD_LPRN):
-        case TD(TD_LCBR):
-        case TD(TD_LABK):
+        // case TD(TD_QUOT):
+        // case TD(TD_DQUOT):
+        // case TD(TD_BQUOT):
+        // case TD(TD_LBRACKET):
+        // case TD(TD_LPRN):
+        // case TD(TD_LCBR):
+        // case TD(TD_LABK):
         /* case TD(TD_SLASH): */
         /* case TD(TD_SCOLON): */
-            return 280;
+            // return 280;
         case TD(TD_ESC_F13):
-            return 750;
-        case OSM(MOD_RGUI):
-            return 3000;
+            return 350;
+        // case OSM(MOD_RGUI):
+        //     return 3000;
         /* case OSM(MOD_RCTL): */
         /*     return 3000; */
         /* case OSM(MOD_RALT): */
         /*     return 3000; */
-        case OSL(_NAV):
-            return 1000;
-        case OSL(_VIMIDEA):
-            return 2000;
-        case OSL(_APP):
-            return 2000;
-        case OSL(_DBGL):
-            return 2000;
+        // case OSL(_NAV):
+        //     return 1000;
+        // case OSL(_VIMIDEA):
+        //     return 2000;
+        // case OSL(_APP):
+        //     return 2000;
+        // case OSL(_DBGL):
+        //     return 2000;
         /* case LT(_NAV, KC_F13): */
         /*     return 150; */
         /* case OSL(_SHIFT): */
@@ -2029,5 +2056,17 @@ uint16_t get_tapping_term(uint16_t keycode, keyrecord_t *record) {
         default:
             return TAPPING_TERM;
 
+    }
+}
+
+bool get_permissive_hold(uint16_t keycode, keyrecord_t *record) {
+    // Allow or not permissive hold for the key
+    // https://beta.docs.qmk.fm/using-qmk/software-features/tap_hold
+    switch (keycode) {
+        case LT(_VIMIDEA, KC_ENTER):
+        case LT(_VIMIDEA, KC_END):
+            return true;
+        default:
+            return true;
     }
 }
