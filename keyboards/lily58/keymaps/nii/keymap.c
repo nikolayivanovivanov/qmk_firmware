@@ -583,10 +583,10 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
  [_QWERTY] = LAYOUT(
   TD(TD_ESC_F13)                  , KC_1 , KC_2 , LT(_VIMIDEA, KC_3)                      , KC_4           , KC_5       /* ,                , */      , KC_6      , KC_7            , LT(_VIMIDEA, KC_8)            , ST_MACRO_9_LPRN   , ST_MACRO_0_RPRN    , KC_BSPC       ,
 //   KC_LBRACKET           , KC_Q , KC_W , KC_E                      , KC_R           , KC_T      /*  ,                , */      , KC_Y      , KC_U            , KC_I            , KC_O   , KC_P    , KC_RBRACKET ,
-  ST_MACRO_LBRK           , KC_Q , KC_W , KC_E                      , KC_R           , KC_T      /*  ,                , */      , KC_Y      , KC_U            , KC_I            , KC_O   , KC_P    , ST_MACRO_RBRK ,
-  ST_MACRO_GRAVE          , KC_A , KC_S , KC_D                      , KC_F           , KC_G     /*   ,                , */      , KC_H      , KC_J            , KC_K            , KC_L   , KC_SCOLON , ST_MACRO_QUOT ,
-  LSFT_T(KC_MINUS)                 , KC_Z , KC_X , KC_C                      , KC_V           , KC_B          , OSL(_VIMIDEA) , OSL(_VIMIDEA) , KC_N      , KC_M            , KC_COMM         , ST_MACRO_DOT , KC_SLSH , LSFT_T(KC_EQUAL)       ,
-                       /* ,      ,      , */      LALT_T(KC_BSLASH) , KC_LCTRL , OSM(MOD_LSFT)     , MO(_NAV)       , KC_SPC  , OSM(MOD_RSFT) , OSM(MOD_RCTL) , OSM(MOD_RALT) /* ,        , */
+  ST_MACRO_LBRK           , KC_Q , KC_W , KC_E                      , KC_R           , KC_T      /*  ,                , */      , KC_Y      , KC_U            , KC_I            , KC_O   , KC_P    , ST_MACRO_GRAVE ,
+  ST_MACRO_RBRK          , KC_A , KC_S , KC_D                      , KC_F           , KC_G     /*   ,                , */      , KC_H      , KC_J            , KC_K            , KC_L   , KC_SCOLON , ST_MACRO_QUOT ,
+  LSFT_T(KC_BSLASH)                 , KC_Z , KC_X , KC_C                      , KC_V           , KC_B          , LT(_VIMIDEA, KC_END) , LT(_VIMIDEA, KC_HOME) , KC_N      , KC_M            , KC_COMM         , ST_MACRO_DOT , KC_SLSH , LSFT_T(KC_ENTER)       ,
+                       /* ,      ,      , */      LALT_T(KC_MINUS) , KC_LCTRL , OSM(MOD_LSFT)     , MO(_NAV)       , KC_SPC  , OSM(MOD_RSFT) , OSM(MOD_RCTL) , RALT_T(KC_EQUAL) /* ,        , */
 ),
 
   // vim normal
@@ -604,7 +604,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
     ST_MACRO_CBRNCLOSE , ST_MACRO_1 , ST_MACRO_2 , ST_MACRO_3                           , ST_MACRO_4  , ST_MACRO_5   /* ,            , */     , ST_MACRO_15  , KC_NO    , KC_NO         , ST_MACRO_16 , ST_MACRO_PASTE_HISTORY , ST_MACRO_CBRNCLOSENL ,
     KC_NO         , ST_MACRO_6 , ST_MACRO_7 , KC_NO                                , ST_MACRO_9  , KC_NO        /* ,            , */     , KC_NO        , KC_NO    , KC_NO         , KC_NO       , ST_MACRO_SCLN_END      , KC_NO         ,
     ST_MACRO_ARROW       , KC_NO      , KC_NO      , ST_MACRO_10                          , ST_MACRO_11 , ST_MACRO_31     , ST_MACRO_PROJ_S , ST_MACRO_STRUCT  , KC_NO        , KC_NO    , LALT(KC_UP) , LALT(KC_DOWN)       , ST_MACRO_VIM_SEARCH    , ST_MACRO_EQ_ARROW     ,
-             /*   ,            ,            , */ KC_LALT , KC_LCTRL , KC_LSHIFT                             , KC_NO , KC_NO                    , KC_LALT , KC_LCTRL , KC_LSHIFT /*    ,             , */
+             /*   ,            ,            , */ ST_MACRO_ARROW , KC_LCTRL , KC_LSHIFT                             , KC_NO , KC_NO                    , KC_RSHIFT , KC_LCTRL , ST_MACRO_EQ_ARROW /*    ,             , */
   ),
   /* [_VIMIDEA] = LAYOUT( */
   /*   KC_F12                           ,  KC_F1     ,   KC_F2    , KC_F3       , KC_F4       , KC_F5                             , KC_F6       , KC_F7          , KC_F8         , KC_F9       , KC_F10                 ,  KC_F11    , */
