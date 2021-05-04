@@ -581,39 +581,39 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
  */
 
  [_QWERTY] = LAYOUT(
-  KC_ESCAPE                  , KC_1 , KC_2 , KC_3                      , KC_4           , KC_5       /* ,                , */      , KC_6      , KC_7            , KC_8           , ST_MACRO_9_LPRN   , ST_MACRO_0_RPRN    , KC_BSPACE       ,
+  TD(TD_ESC_F13)                  , KC_1 , KC_2 , KC_3                      , KC_4           , KC_5       /* ,                , */      , KC_6      , KC_7            , KC_8           , ST_MACRO_9_LPRN   , ST_MACRO_0_RPRN    , KC_BSPACE       ,
 //   KC_LBRACKET           , KC_Q , KC_W , KC_E                      , KC_R           , KC_T      /*  ,                , */      , KC_Y      , KC_U            , KC_I            , KC_O   , KC_P    , KC_RBRACKET ,
   ST_MACRO_LBRK           , KC_Q , KC_W , KC_E                      , KC_R           , KC_T      /*  ,                , */      , KC_Y      , KC_U            , KC_I            , KC_O   , KC_P    , ST_MACRO_GRAVE ,
   ST_MACRO_RBRK          , KC_A , KC_S , KC_D                      , KC_F           , KC_G     /*   ,                , */      , KC_H      , KC_J            , KC_K            , KC_L   , KC_SCOLON , ST_MACRO_QUOT ,
-  OSM(MOD_LSFT)                 , KC_Z , KC_X , KC_C                      , KC_V           , KC_B          , KC_EQUAL , KC_MINUS , KC_N      , KC_M            , KC_COMM         , ST_MACRO_DOT , KC_SLSH , OSM(MOD_RSFT)       ,
-                       /* ,      ,      , */      ALT_T(KC_BSLASH) , OSM(MOD_LCTL) , TG(_NAV)     , KC_ENTER       , KC_SPC  , MO(_NAV) , KC_RCTRL , ALGR_T(KC_BSLASH) /* ,        , */
+  OSM(MOD_LSFT)                 , KC_Z , KC_X , KC_C                      , KC_V           , KC_B          , LT(_DBGL, KC_EQUAL) , KC_MINUS , KC_N      , KC_M            , KC_COMM         , ST_MACRO_DOT , KC_SLSH , OSM(MOD_RSFT)       ,
+                       /* ,      ,      , */      ALT_T(KC_BSLASH) , OSM(MOD_LCTL) , MO(_NAV)     , KC_ENTER       , KC_SPC  , MO(_VIMIDEA) , OSM(MOD_RCTL) , ALGR_T(KC_EQUAL) /* ,        , */
 ),
 
- [_NAV] = LAYOUT(
-  TO(_QWERTY)        , KC_F1      , KC_F2      , KC_F3                                , KC_F4       , KC_F5        /* ,            , */     , KC_F6        , KC_F7    , KC_F8         , KC_F9       , KC_F10                 , KC_DELETE        ,
-  KC_NO , KC_PGUP , KC_HOME , KC_UP                      , KC_END , KC_NO         /* ,                         , */       , KC_NO , KC_NO     , KC_NO          , KC_NO   , KC_NO , KC_NO ,
-//   KC_NO         , OSL(_APP)   , OSL(_VIMIDEA)          , KC_DELETE                           , KC_NO      , KC_NO    /*              ,                         , */       , KC_LEFT         , KC_DOWN        , KC_UP            , KC_RIGHT , OSL(_VIMIDEA)   , ST_MACRO_31 ,
-  KC_NO         , LCTL(KC_LEFT)   , KC_LEFT          , KC_DOWN                           , KC_RIGHT      , LCTL(KC_RIGHT)    /*              ,                         , */       , KC_NO         , KC_NO        , KC_NO            , KC_NO , KC_NO   , KC_NO ,
-  KC_CAPSLOCK     , KC_PGDN, LCTL(KC_X)       , LCTL(KC_C)     , LCTL(KC_V)                  , KC_NO            , KC_F11               , KC_F12  , KC_NO           , KC_APPLICATION , LSFT(KC_TAB)     , KC_TAB   , KC_NO      , KC_RSHIFT  ,
-   /*           ,             ,                , */                          LCTL(KC_D) , LCTL(KC_E)   , KC_LSHIFT                    , KC_ENTER                  , KC_F23/*autocomplete*/ , MO(_APP)       , KC_RCTRL , KC_RALT /* ,          , */
-  )                                  ,
+//  [_NAV] = LAYOUT(
+//   TO(_QWERTY)        , KC_F1      , KC_F2      , KC_F3                                , KC_F4       , KC_F5        /* ,            , */     , KC_F6        , KC_F7    , KC_F8         , KC_F9       , KC_F10                 , KC_DELETE        ,
+//   KC_NO , KC_PGUP , KC_HOME , KC_UP                      , KC_END , KC_NO         /* ,                         , */       , KC_NO , KC_NO     , KC_NO          , KC_NO   , KC_NO , KC_NO ,
+// //   KC_NO         , OSL(_APP)   , OSL(_VIMIDEA)          , KC_DELETE                           , KC_NO      , KC_NO    /*              ,                         , */       , KC_LEFT         , KC_DOWN        , KC_UP            , KC_RIGHT , OSL(_VIMIDEA)   , ST_MACRO_31 ,
+//   KC_NO         , LCTL(KC_LEFT)   , KC_LEFT          , KC_DOWN                           , KC_RIGHT      , LCTL(KC_RIGHT)    /*              ,                         , */       , KC_NO         , KC_NO        , KC_NO            , KC_NO , KC_NO   , KC_NO ,
+//   KC_CAPSLOCK     , KC_PGDN, LCTL(KC_X)       , LCTL(KC_C)     , LCTL(KC_V)                  , KC_NO            , KC_F11               , KC_F12  , KC_NO           , KC_APPLICATION , LSFT(KC_TAB)     , KC_TAB   , KC_NO      , KC_RSHIFT  ,
+//    /*           ,             ,                , */                          LCTL(KC_D) , LCTL(KC_E)   , KC_LSHIFT                    , KC_ENTER                  , KC_F23/*autocomplete*/ , MO(_APP)       , KC_RCTRL , KC_RALT /* ,          , */
+//   )                                  ,
 
   // vim normal
-//  [_NAV] = LAYOUT(
-//   TO(_QWERTY)     , KC_NO       , KC_NO          , MO(_DBGL)                          , KC_END      , KC_NO         /*         ,                         , */       , KC_HOME         , KC_PGDN        , KC_PGUP          , KC_END   , KC_NO           , KC_DEL  ,
-//   KC_NO , KC_NO , LCTL(KC_RIGHT) , LCTL(KC_RIGHT)                      , LCTL(KC_Y) , KC_NO         /* ,                         , */       , LCTL(KC_INSERT) , LCTL(KC_Z)     , KC_HOME          , KC_END   , LSFT(KC_INSERT) , ST_MACRO_31 ,
-// //   KC_NO         , OSL(_APP)   , OSL(_VIMIDEA)          , KC_DELETE                           , KC_NO      , KC_NO    /*              ,                         , */       , KC_LEFT         , KC_DOWN        , KC_UP            , KC_RIGHT , OSL(_VIMIDEA)   , ST_MACRO_31 ,
-//   KC_NO         , KC_F23/*autocomplete*/   , OSL(_VIMIDEA)          , KC_DELETE                           , KC_NO      , KC_NO    /*              ,                         , */       , KC_LEFT         , KC_DOWN        , KC_UP            , KC_RIGHT , ST_MACRO_31   , KC_NO ,
-//   KC_LSHIFT     , KC_NO       , LCTL(KC_X)     , KC_DELETE                           , KC_LSFT    , LCTL(KC_LEFT)            , KC_END               , KC_HOME  , KC_F3           , KC_APPLICATION , LSFT(KC_TAB)     , KC_TAB   , LCTL(KC_F)      , KC_ENTER  ,
-//    /*           ,             ,                , */                          KC_LALT , KC_LCTRL   , KC_CAPSLOCK                    , KC_F23/*autocomplete*/                  , MO(_APP) , KC_F23/*autocomplete*/       , LCTL(KC_ENTER) , LALT(KC_ENTER) /* ,          , */
-//   )                                  ,
+ [_NAV] = LAYOUT(
+  TO(_QWERTY)     , KC_NO       , KC_NO          , MO(_DBGL)                          , KC_END      , KC_NO         /*         ,                         , */       , KC_HOME         , KC_PGDN        , KC_PGUP          , KC_END   , KC_NO           , KC_DEL  ,
+  KC_NO , KC_NO , LCTL(KC_RIGHT) , LCTL(KC_RIGHT)                      , LCTL(KC_Y) , KC_NO         /* ,                         , */       , LCTL(KC_INSERT) , LCTL(KC_Z)     , KC_HOME          , KC_END   , LSFT(KC_INSERT) , ST_MACRO_31 ,
+//   KC_NO         , OSL(_APP)   , OSL(_VIMIDEA)          , KC_DELETE                           , KC_NO      , KC_NO    /*              ,                         , */       , KC_LEFT         , KC_DOWN        , KC_UP            , KC_RIGHT , OSL(_VIMIDEA)   , ST_MACRO_31 ,
+  KC_NO         , KC_F23/*autocomplete*/   , KC_NO          , KC_DELETE                           , KC_NO      , KC_NO    /*              ,                         , */       , KC_LEFT         , KC_DOWN        , KC_UP            , KC_RIGHT , ST_MACRO_31   , KC_NO ,
+  KC_LSHIFT     , KC_NO       , LCTL(KC_X)     , KC_CAPSLOCK                           , KC_LSFT    , LCTL(KC_LEFT)            , ST_MACRO_EQ_ARROW               , ST_MACRO_ARROW  , KC_F3           , KC_APPLICATION , LSFT(KC_TAB)     , KC_TAB   , LCTL(KC_F)      , KC_CAPSLOCK  ,
+   /*           ,             ,                , */                          KC_LALT , KC_LCTRL   , KC_TRANSPARENT                    , KC_F23/*autocomplete*/                  , KC_F23/*autocomplete*/ , MO(_APP)       , LCTL(KC_ENTER) , LALT(KC_ENTER) /* ,          , */
+  )                                  ,
 
   [_VIMIDEA] = LAYOUT(
     KC_F12        , KC_F1      , KC_F2      , KC_F3                                , KC_F4       , KC_F5        /* ,            , */     , KC_F6        , KC_F7    , KC_F8         , KC_F9       , KC_F10                 , KC_F11        ,
     ST_MACRO_CBRNCLOSE , ST_MACRO_1 , ST_MACRO_2 , ST_MACRO_3                           , ST_MACRO_4  , ST_MACRO_5   /* ,            , */     , ST_MACRO_15  , KC_NO    , KC_NO         , ST_MACRO_16 , ST_MACRO_PASTE_HISTORY , ST_MACRO_CBRNCLOSENL ,
     KC_NO         , ST_MACRO_6 , ST_MACRO_7 , KC_NO                                , ST_MACRO_9  , KC_NO        /* ,            , */     , KC_NO        , KC_NO    , KC_NO         , KC_NO       , ST_MACRO_SCLN_END      , KC_NO         ,
-    ST_MACRO_ARROW       , KC_NO      , KC_NO      , ST_MACRO_10                          , ST_MACRO_11 , ST_MACRO_31     , ST_MACRO_PROJ_S , ST_MACRO_STRUCT  , KC_NO        , KC_NO    , LALT(KC_UP) , LALT(KC_DOWN)       , ST_MACRO_VIM_SEARCH    , ST_MACRO_EQ_ARROW     ,
-             /*   ,            ,            , */ KC_LALT , KC_LCTRL , KC_LSHIFT                             , KC_NO , KC_NO                    , KC_LALT , KC_LCTRL , KC_LSHIFT /*    ,             , */
+    KC_CAPSLOCK       , KC_NO      , KC_NO      , ST_MACRO_10                          , ST_MACRO_11 , ST_MACRO_31     , ST_MACRO_PROJ_S , ST_MACRO_STRUCT  , KC_NO        , KC_NO    , LALT(KC_UP) , LALT(KC_DOWN)       , ST_MACRO_VIM_SEARCH    , ST_MACRO_EQ_ARROW     ,
+             /*   ,            ,            , */ KC_LALT , KC_LCTRL , MO(_APP)                             , ST_MACRO_PROJ_S , KC_NO                    , KC_LALT , KC_LCTRL , KC_LSHIFT /*    ,             , */
   ),
   /* [_VIMIDEA] = LAYOUT( */
   /*   KC_F12                           ,  KC_F1     ,   KC_F2    , KC_F3       , KC_F4       , KC_F5                             , KC_F6       , KC_F7          , KC_F8         , KC_F9       , KC_F10                 ,  KC_F11    , */
@@ -2051,19 +2051,17 @@ return true;
 
 // Chaning layer sends the proper F keys to warn
 // Not good idea, because AutoHotkey did not always caught the F keys and they ware typed a <F...> in vim. I use MO now anyway
-layer_state_t layer_state_set_user(layer_state_t state) {
-    // if (IS_LAYER_ON_STATE(state, _VIMIDEA)) {
-    //     tap_code(KC_F19);
-    // } else if (IS_LAYER_ON_STATE(state, _APP)) {
-    //     tap_code(KC_F18);
-    // }
-    if (IS_LAYER_ON_STATE(state, _NAV)) {
-        tap_code(KC_F18);
-    } else {
-        tap_code(KC_F17);
-    }
-  return state;
-}
+//     //     tap_code(KC_F19);
+//     // } else if (IS_LAYER_ON_STATE(state, _APP)) {
+//     //     tap_code(KC_F18);
+//     // }
+//     if (IS_LAYER_ON_STATE(state, _NAV)) {
+//         tap_code(KC_F18);
+//     } else {
+//         tap_code(KC_F17);
+//     }
+//   return state;
+// }
 
 uint16_t get_tapping_term(uint16_t keycode, keyrecord_t *record) {
     switch (keycode) {
