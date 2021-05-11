@@ -29,8 +29,8 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 #define USE_SERIAL_PD2
 
-// I can't make it work per key and shifts are actuve too much time. Make it 1 second.
-#define ONESHOT_TIMEOUT 1000
+// I can't make it work per key and shifts are actuve too much time. Make it 2 seconds.
+#define ONESHOT_TIMEOUT 2000
 
 #define TAPPING_FORCE_HOLD
 #define TAPPING_FORCE_HOLD_PER_KEY
