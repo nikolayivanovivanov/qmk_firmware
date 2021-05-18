@@ -30,7 +30,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 #define USE_SERIAL_PD2
 
 // I can't make it work per key and shifts are actuve too much time. Make it 2 seconds.
-#define ONESHOT_TIMEOUT 2000
+#define ONESHOT_TIMEOUT 300
 
 #define TAPPING_FORCE_HOLD
 #define TAPPING_FORCE_HOLD_PER_KEY
@@ -40,7 +40,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 #define PERMISSIVE_HOLD
 // hope that this disables this feature
 /* #define ONESHOT_TAP_TOGGLE 15 */
-#define COMBO_COUNT 0
+#define COMBO_COUNT 4
 // I think that this is the time between the first key press and the second one
 // If it is too small, the combo will be ignored
 #define COMBO_TERM 500
