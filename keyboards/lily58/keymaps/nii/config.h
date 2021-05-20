@@ -29,12 +29,12 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 #define USE_SERIAL_PD2
 
-// I can't make it work per key and shifts are actuve too much time. Make it 2 seconds.
-#define ONESHOT_TIMEOUT 300
+// I can't make it work per key. TAPPING_TERM applies all the time
+#define ONESHOT_TIMEOUT 1000
 
 #define TAPPING_FORCE_HOLD
 #define TAPPING_FORCE_HOLD_PER_KEY
-#define TAPPING_TERM 200
+#define TAPPING_TERM 300
 #define TAPPING_TERM_PER_KEY
 // Usefull for dual keys when you fast tap and release
 #define PERMISSIVE_HOLD
