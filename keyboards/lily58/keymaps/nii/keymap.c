@@ -352,11 +352,11 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
  */
 
  [_QWERTY] = LAYOUT(
-  TD(TD_EXC_TO_NORMAL)               , KC_Q      , KC_W            , KC_E            , KC_R        , KC_T /*   ,          , */      , KC_Y      , KC_U        , KC_I       , KC_O             , KC_P      , KC_BSPACE     ,
-  ST_MACRO_GRAVE          , KC_A      , KC_S            , KC_D            , KC_F        , KC_G /*   ,          , */      , KC_H      , KC_J        , KC_K       , KC_L             , KC_SCOLON , ST_MACRO_QUOT ,
-  OSM(MOD_LSFT)           , KC_Z      , KC_X            , KC_C            , KC_V        , KC_B /*   ,          , */      , KC_N      , KC_M        , KC_COMM    , ST_MACRO_DOT     , KC_SLSH   , OSM(MOD_RSFT) ,
-  MO(_NORMAL)                , KC_LBRACKET , ALT_T(KC_MINUS) , KC_LCTRL        , KC_LBRACKET , MO(_SYML) , KC_END   , KC_HOME , MO(_SYMR) , KC_RBRACKET , KC_RCTRL   , ALGR_T(KC_EQUAL) , KC_RBRACKET   , MO(_NUM)      ,
-                       /* ,           ,                 , */      KC_NO , KC_NO    , TO(_NORMAL) , KC_ENTER , KC_SPC  , TO(_QWERTY) , KC_NO    , KC_NO /* ,                  , */
+  TD(TD_EXC_TO_NORMAL)    , KC_Q        , KC_W            , KC_E          , KC_R     , KC_T /*     ,          , */      , KC_Y        , KC_U     , KC_I     , KC_O             , KC_P        , KC_BSPACE     ,
+  ST_MACRO_GRAVE          , KC_A        , KC_S            , KC_D          , KC_F     , KC_G /*     ,          , */      , KC_H        , KC_J     , KC_K     , KC_L             , KC_SCOLON   , ST_MACRO_QUOT ,
+  OSM(MOD_LSFT)           , KC_Z        , KC_X            , KC_C          , KC_V     , KC_B /*     ,          , */      , KC_N        , KC_M     , KC_COMM  , ST_MACRO_DOT     , KC_SLSH     , OSM(MOD_RSFT) ,
+  MO(_NORMAL)             , KC_LBRACKET , ALT_T(KC_MINUS) , KC_LCTRL      , KC_MINUS , MO(_SYML)   , KC_END   , KC_HOME , MO(_SYMR)   , KC_EQUAL , KC_RCTRL , ALGR_T(KC_END) , KC_RBRACKET , MO(_NUM)      ,
+                       /* ,             ,                 , */      KC_NO , KC_NO    , TO(_NORMAL) , KC_ENTER , KC_SPC  , TO(_QWERTY) , KC_NO    , KC_NO /* ,                  , */
 )                         ,
 
 //  [_NORMAL] = LAYOUT(
