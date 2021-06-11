@@ -28,8 +28,8 @@ extern uint8_t is_master;
 /* #define _LOWER 1 */
 /* #define _RAISE 2 */
 /* #define _ADJUST 3 */
-#define _NORMAL_TMP 2
-#define _NORMAL 3
+#define _NORMAL 2
+#define _NORMAL_TMP 3
 #define _SYML 4
 #define _SYMR 5
 #define _APP 6
@@ -426,6 +426,14 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
   // vim normal
   // r replace deleted the char under the cursor and switch to _ONESHOT_INSERT, where any key, prints the char and switches back to _NORMAL
   // d switches to _D layer
+ [_NORMAL] = LAYOUT(
+  V_ESC             , KC_NO , V_W       , LCTL(KC_RIGHT)   , KC_NO       , KC_NO         /*         ,       , */      , V_Y       , LCTL(KC_Z)     , V_I              , V_O      , LSFT(KC_INSERT) , KC_BSPACE         ,
+  KC_NO             , V_A   , KC_NO     , V_D              , KC_NO       , KC_NO    /*              ,       , */      , KC_LEFT   , KC_DOWN        , KC_UP            , KC_RIGHT , ST_MACRO_31     , KC_NO             ,
+  MO(_NORMAL_SHIFT) , KC_NO , KC_DELETE , V_C              , TO(_VISUAL) , LCTL(KC_LEFT)         /* ,       , */      , KC_F3     , KC_APPLICATION , LSFT(KC_TAB)     , KC_TAB   , LCTL(KC_F)      , MO(_NORMAL_SHIFT) ,
+  MO(_NORMAL_TMP)   , KC_NO , KC_HOME   , MO(_NORMAL_CTRL) , KC_NO       , MO(_SYML)                , KC_NO , KC_NO   , MO(_SYMR) , KC_NO          , MO(_NORMAL_CTRL) , KC_END   , KC_NO           , MO(_NUM)          ,
+   /*               ,       ,           , */ KC_NO         , KC_NO       , KC_NO                    , KC_NO , V_SPACE , KC_NO     , KC_NO          , KC_NO /*         ,          , */
+  )                 ,
+
  [_NORMAL_TMP] = LAYOUT(
   TO(_QWERTY) , KC_NO , KC_LGUI   , KC_LALT  , KC_LCTRL , KC_NO         /* ,           , */              , LCTL(KC_INSERT) , LCTL(KC_Z)     , KC_HOME      , KC_END   , LSFT(KC_INSERT) , KC_BSPACE ,
   KC_NO       , KC_NO , KC_NO     , KC_NO    , KC_NO    , KC_NO    /*      ,           , */              , KC_LEFT         , KC_DOWN        , KC_UP        , KC_RIGHT , ST_MACRO_31     , KC_DELETE ,
@@ -434,20 +442,12 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
    /*         ,       ,           , */ KC_NO , KC_NO    , KC_NO            , KC_LSHIFT , ST_MACRO_STRUCT , KC_NO           , KC_NO          , KC_NO /*     ,          , */
   )           ,
 
- [_NORMAL] = LAYOUT(
-  V_ESC             , KC_NO , V_W            , LCTL(KC_RIGHT)   , KC_NO       , KC_NO         /*         ,       , */    , V_Y       , LCTL(KC_Z)     , V_I              , V_O      , LSFT(KC_INSERT) , KC_BSPACE         ,
-  KC_NO             , V_A   , KC_NO          , V_D              , KC_NO       , KC_NO    /*              ,       , */    , KC_LEFT   , KC_DOWN        , KC_UP            , KC_RIGHT , ST_MACRO_31     , KC_NO             ,
-  MO(_NORMAL_SHIFT) , KC_NO , KC_DELETE      , V_C              , TO(_VISUAL) , LCTL(KC_LEFT)         /* ,       , */    , KC_F3     , KC_APPLICATION , LSFT(KC_TAB)     , KC_TAB   , LCTL(KC_F)      , MO(_NORMAL_SHIFT) ,
-  MO(_NORMAL_TMP)   , KC_NO , ALT_T(KC_HOME) , MO(_NORMAL_CTRL) , KC_NO       , MO(_SYML)                , KC_NO , KC_NO , MO(_SYMR) , KC_NO          , MO(_NORMAL_CTRL) , KC_END   , KC_NO           , MO(_NUM)          ,
-   /*               ,       ,                , */ KC_NO         , KC_NO       , KC_NO                    , KC_NO , KC_NO , KC_NO     , KC_NO          , KC_NO /*         ,          , */
-  )                 ,
-
  [_VISUAL] = LAYOUT(
-  V_ESC     , KC_NO , V_W           , LSFT(LCTL(KC_RIGHT)) , KC_NO , KC_NO         /*               ,       , */    , ST_MACRO_YANK , KC_NO         , V_I           , KC_NO          , ST_MACRO_PUT , SV_DELETE ,
-  KC_NO     , V_A   , KC_NO         , SV_DELETE            , KC_NO , KC_NO    /*                    ,       , */    , LSFT(KC_LEFT) , LSFT(KC_DOWN) , V_K   , LSFT(KC_RIGHT) , KC_NO        , KC_NO     ,
-  KC_LSHIFT , KC_NO , SV_CUT        , SV_CHANGE            , KC_NO , LSFT(LCTL(KC_LEFT))         /* ,       , */    , KC_NO         , KC_NO         , KC_NO         , KC_NO          , KC_NO        , KC_NO     ,
-  KC_NO     , KC_NO , LSFT(KC_HOME) , KC_NO                , KC_NO , KC_NO                          , KC_NO , KC_NO , LSFT(KC_HOME) , LSFT(KC_PGDN) , LSFT(KC_PGUP) , LSFT(KC_END)   , KC_NO        , KC_NO     ,
-   /*       ,       ,               , */ KC_NO             , KC_NO , KC_NO                          , KC_NO , KC_NO , KC_NO         , KC_NO         , KC_NO /*      ,                , */
+  V_ESC     , KC_NO , V_W           , LSFT(LCTL(KC_RIGHT)) , KC_NO , KC_NO         /*               ,       , */      , V_Y , KC_NO         , V_I      , KC_NO          , ST_MACRO_PUT , SV_DELETE ,
+  KC_NO     , V_A   , KC_NO         , V_D                  , KC_NO , KC_NO    /*                    ,       , */      , LSFT(KC_LEFT) , LSFT(KC_DOWN) , V_K      , LSFT(KC_RIGHT) , KC_NO        , KC_NO     ,
+  KC_LSHIFT , KC_NO , SV_CUT        , V_C                  , KC_NO , LSFT(LCTL(KC_LEFT))         /* ,       , */      , KC_NO         , KC_NO         , KC_NO    , KC_NO          , KC_NO        , KC_NO     ,
+  KC_NO     , KC_NO , LSFT(KC_HOME) , KC_NO                , KC_NO , KC_NO                          , KC_NO , KC_NO   , KC_NO         , KC_NO         , KC_NO    , KC_NO          , KC_NO        , KC_NO     ,
+   /*       ,       ,               , */ KC_NO             , KC_NO , KC_NO                          , KC_NO , V_SPACE , KC_NO         , KC_NO         , KC_NO /* ,                , */
   )         ,
 
  [_NORMAL_SHIFT] = LAYOUT(
@@ -1060,7 +1060,6 @@ switch (keycode) {
       /* tap_code(KC_F18); */
       layer_clear();
       layer_on(_NORMAL);
-
     }
     break;
     case ST_MACRO_PUT:
@@ -1929,8 +1928,77 @@ switch (keycode) {
           //atmp end
           }
 
-          if (last_keys_vim[0] == V_Y) {
+          /* if (last_keys_vim[0] == V_D && last_keys_vim[1] == V_D && last_keys_vim[2] == V_SPACE) { */
+          /*     if (IS_LAYER_ON(_NORMAL)) { */
+          /*         //@fixme Maybe this is slow. Remove the clear keys of so */
+          /*         clear_last_keys_vim(); */
+          /*         tap_code16(KC_END); */
+          /*         tap_code16(LSFT(KC_HOME)); */
+          /*         tap_code16(LSFT(KC_HOME)); */
+          /*         tap_code16(LCTL(KC_X)); */
+          /*     } */
+          /* } else */
+           if (last_keys_vim[0] == V_Y && IS_LAYER_ON(_VISUAL)) {
+              //@fixme Maybe this is slow. Remove the clear keys of so
+              tap_code16(LCTL(KC_INS));
 
+              clear_last_keys_vim();
+              layer_clear();
+              layer_on(_NORMAL);
+           } else if (last_keys_vim[0] == V_D && IS_LAYER_ON(_VISUAL)) {
+              //@fixme Maybe this is slow. Remove the clear keys of so
+              if (last_keys_vim[1] == V_SPACE) {
+                  tap_code16(LCTL(KC_X));
+              } else {
+                  tap_code16(KC_DELETE);
+              }
+
+              clear_last_keys_vim();
+              layer_clear();
+              layer_on(_NORMAL);
+           } else if (last_keys_vim[0] == V_C && IS_LAYER_ON(_VISUAL)) {
+              //@fixme Maybe this is slow. Remove the clear keys of so
+              if (last_keys_vim[1] == V_SPACE) {
+                  tap_code16(LCTL(KC_X));
+              } else {
+                  tap_code16(KC_DELETE);
+              }
+
+              clear_last_keys_vim();
+              layer_clear();
+              layer_on(_QWERTY_VIM);
+          /* } else if (last_keys_vim[0] == V_Y && last_keys_vim[1] == V_Y && last_keys_vim[2] == V_SPACE) { */
+          /*     if (IS_LAYER_ON(_NORMAL)) { */
+          /*         //@fixme Maybe this is slow. Remove the clear keys of so */
+          /*         clear_last_keys_vim(); */
+          /*         tap_code16(KC_END); */
+          /*         tap_code16(LSFT(KC_HOME)); */
+          /*         tap_code16(LSFT(KC_HOME)); */
+          /*         tap_code16(LCTL(KC_INSERT)); */
+          /*     } */
+          } else if (last_keys_vim[0] == V_D && last_keys_vim[1] == V_D) {
+              if (IS_LAYER_ON(_NORMAL)) {
+                  tap_code16(KC_END);
+                  tap_code16(LSFT(KC_HOME));
+                  tap_code16(LSFT(KC_HOME));
+                  /* tap_code16(LSFT(KC_UP)); */
+                  if (last_keys_vim[2] == V_SPACE) {
+                      tap_code16(LCTL(KC_X));
+                  } else {
+                      tap_code16(KC_DELETE);
+                  }
+                  clear_last_keys_vim();
+              }
+          } else if (last_keys_vim[0] == V_Y && last_keys_vim[1] == V_Y) {
+              if (IS_LAYER_ON(_NORMAL)) {
+                  //@fixme Maybe this is slow. Remove the clear keys of so
+                  clear_last_keys_vim();
+                  tap_code16(KC_END);
+                  tap_code16(LSFT(KC_HOME));
+                  tap_code16(LSFT(KC_HOME));
+                  /* tap_code16(LSFT(KC_UP)); */
+                  tap_code16(LCTL(KC_INSERT));
+              }
           } else if (last_keys_vim[0] == V_K) {
               if (IS_LAYER_ON(_VISUAL)) {
                   //@fixme Maybe this is slow. Remove the clear keys of so
@@ -1961,11 +2029,20 @@ switch (keycode) {
                       clear_last_keys_vim();
                       tap_code16(LCTL(KC_INSERT));
                   } else if (last_keys_vim[2] == V_D) {
+                      if (last_keys_vim[3] == V_SPACE) {
+                          tap_code16(LCTL(KC_X));
+                      } else {
+                          tap_code16(KC_DELETE);
+                      }
                       clear_last_keys_vim();
-                      tap_code16(KC_DELETE);
-                  } else if (last_keys_vim[2] == V_D) {
+                  } else if (last_keys_vim[2] == V_C) {
+                      if (last_keys_vim[3] == V_SPACE) {
+                          tap_code16(LCTL(KC_X));
+                      } else {
+                          tap_code16(KC_DELETE);
+                      }
+
                       clear_last_keys_vim();
-                      tap_code16(KC_DELETE);
                       layer_clear();
                       layer_on(_QWERTY_VIM);
                   }
