@@ -24,20 +24,21 @@ extern rgblight_config_t rgblight_config;
 extern uint8_t is_master;
 
 #define _QWERTY 0
+#define _QWERTY_VIM 1
 /* #define _LOWER 1 */
 /* #define _RAISE 2 */
 /* #define _ADJUST 3 */
-#define _NORMAL_TMP 1
-#define _NORMAL 2
-#define _SYML 3
-#define _SYMR 4
-#define _APP 5
-#define _DBGL 6
-#define _NUM 7
-#define _FN 8
-#define _NORMAL_CTRL 9
-#define _VISUAL 10
-#define _NORMAL_SHIFT 11
+#define _NORMAL_TMP 2
+#define _NORMAL 3
+#define _SYML 4
+#define _SYMR 5
+#define _APP 6
+#define _DBGL 7
+#define _NUM 8
+#define _FN 9
+#define _NORMAL_CTRL 10
+#define _VISUAL 11
+#define _NORMAL_SHIFT 12
 
 /* #define _QWERTY 0 */
 /* #define _NORMAL 1 */
@@ -406,6 +407,13 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
                        /* ,             ,                , */      KC_NO , KC_NO    , TO(_NORMAL) , KC_F23 , KC_SPC , TO(_QWERTY) , KC_NO    , KC_NO /* ,                , */
 )                         ,
 
+ [_QWERTY_VIM] = LAYOUT(
+  TO(_NORMAL)             , KC_Q        , KC_W           , KC_E          , KC_R     , KC_T /*     ,        , */     , KC_Y        , KC_U     , KC_I     , KC_O           , KC_P        , KC_BSPACE     ,
+  ST_MACRO_GRAVE          , KC_A        , KC_S           , KC_D          , KC_F     , KC_G /*     ,        , */     , KC_H        , KC_J     , KC_K     , KC_L           , KC_SCOLON   , ST_MACRO_QUOT ,
+  OSM(MOD_LSFT)           , KC_Z        , KC_X           , KC_C          , KC_V     , KC_B /*     ,        , */     , KC_N        , KC_M     , KC_COMM  , ST_MACRO_DOT   , KC_SLSH     , OSM(MOD_RSFT) ,
+  MO(_NORMAL_TMP)         , KC_LBRACKET , ALT_T(KC_HOME) , KC_LCTRL      , KC_MINUS , MO(_SYML)   , KC_NO  , KC_NO  , MO(_SYMR)   , KC_EQUAL , KC_RCTRL , ALGR_T(KC_END) , KC_RBRACKET , MO(_NUM)      ,
+                       /* ,             ,                , */      KC_NO , KC_NO    , TO(_NORMAL) , KC_F23 , KC_SPC , TO(_QWERTY) , KC_NO    , KC_NO /* ,                , */
+)                         ,
 //  [_NORMAL] = LAYOUT(
 //   TO(_QWERTY) , KC_F1         , KC_F2         , KC_F3                                  , KC_F4      , KC_F5        /*      ,          , */                     , KC_F6    , KC_F7          , KC_F8        , KC_F9    , KC_F10        , KC_DELETE   ,
 //   KC_NO       , KC_PGUP       , KC_HOME       , KC_UP                                  , KC_END     , KC_NO         /*     ,          , */                     , KC_NO    , KC_NO          , KC_NO        , KC_NO    , KC_NO         , KC_NO       ,
@@ -419,28 +427,28 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
   // r replace deleted the char under the cursor and switch to _ONESHOT_INSERT, where any key, prints the char and switches back to _NORMAL
   // d switches to _D layer
  [_NORMAL_TMP] = LAYOUT(
-  KC_ESCAPE         , KC_NO       , KC_LGUI   , KC_LALT          , KC_LCTRL    , KC_NO         /*         ,           , */              , LCTL(KC_INSERT) , LCTL(KC_Z)     , KC_HOME      , KC_END   , LSFT(KC_INSERT) , KC_BSPACE         ,
-  KC_NO             , TO(_QWERTY) , KC_NO     , KC_NO            , KC_NO       , KC_NO    /*              ,           , */              , KC_LEFT         , KC_DOWN        , KC_UP        , KC_RIGHT , ST_MACRO_31     , KC_DELETE         ,
-  MO(_NORMAL_SHIFT) , KC_NO       , KC_DELETE , KC_NO            , TO(_VISUAL) , LCTL(KC_LEFT)         /* ,           , */              , KC_F3           , KC_APPLICATION , LSFT(KC_TAB) , KC_TAB   , LCTL(KC_F)      , MO(_NORMAL_SHIFT) ,
-  KC_NO             , KC_NO       , KC_LALT   , MO(_NORMAL_CTRL) , KC_NO       , MO(_DBGL)                , KC_NO    , KC_NO         , KC_NO         , KC_PGDN        , KC_PGUP      , KC_END   , KC_NO           , KC_ENTER          ,
-   /*               ,             ,           , */ KC_NO         , KC_NO       , KC_NO                    , KC_LSHIFT , ST_MACRO_STRUCT , KC_NO           , KC_NO          , KC_NO /*     ,          , */
-  )                 ,
+  TO(_QWERTY) , KC_NO , KC_LGUI   , KC_LALT  , KC_LCTRL , KC_NO         /* ,           , */              , LCTL(KC_INSERT) , LCTL(KC_Z)     , KC_HOME      , KC_END   , LSFT(KC_INSERT) , KC_BSPACE ,
+  KC_NO       , KC_NO , KC_NO     , KC_NO    , KC_NO    , KC_NO    /*      ,           , */              , KC_LEFT         , KC_DOWN        , KC_UP        , KC_RIGHT , ST_MACRO_31     , KC_DELETE ,
+  KC_NO       , KC_NO , KC_DELETE , KC_NO    , KC_NO    , KC_NO         /* ,           , */              , KC_F3           , KC_APPLICATION , LSFT(KC_TAB) , KC_TAB   , LCTL(KC_F)      , KC_NO     ,
+  KC_NO       , KC_NO , KC_LALT   , KC_NO    , KC_NO    , MO(_DBGL)        , KC_NO     , KC_NO           , KC_NO           , KC_PGDN        , KC_PGUP      , KC_END   , KC_NO           , KC_ENTER  ,
+   /*         ,       ,           , */ KC_NO , KC_NO    , KC_NO            , KC_LSHIFT , ST_MACRO_STRUCT , KC_NO           , KC_NO          , KC_NO /*     ,          , */
+  )           ,
 
  [_NORMAL] = LAYOUT(
-  V_ESC             , KC_NO , LCTL(KC_RIGHT) , LCTL(KC_RIGHT)   , KC_NO       , KC_NO         /*         ,       , */    , LCTL(KC_INSERT) , LCTL(KC_Z)     , V_I              , V_O      , LSFT(KC_INSERT) , KC_BSPACE         ,
-  KC_NO             , V_A   , KC_NO          , KC_DELETE        , KC_NO       , KC_NO    /*              ,       , */    , KC_LEFT         , KC_DOWN        , KC_UP            , KC_RIGHT , ST_MACRO_31     , KC_NO             ,
-  MO(_NORMAL_SHIFT) , KC_NO , KC_NO          , KC_NO            , TO(_VISUAL) , LCTL(KC_LEFT)         /* ,       , */    , KC_F3           , KC_APPLICATION , LSFT(KC_TAB)     , KC_TAB   , LCTL(KC_F)      , MO(_NORMAL_SHIFT) ,
-  MO(_NORMAL_TMP)   , KC_NO , ALT_T(KC_HOME) , MO(_NORMAL_CTRL) , KC_NO       , MO(_SYML)                , KC_NO , KC_NO , MO(_SYMR)       , KC_NO          , MO(_NORMAL_CTRL) , KC_END   , KC_NO           , LT(_NUM           , KC_ENTER) ,
-   /*               ,       ,                , */ KC_NO         , KC_NO       , KC_NO                    , KC_NO , KC_NO , KC_NO           , KC_NO          , KC_NO /*         ,          , */
+  V_ESC             , KC_NO , V_W            , LCTL(KC_RIGHT)   , KC_NO       , KC_NO         /*         ,       , */    , V_Y       , LCTL(KC_Z)     , V_I              , V_O      , LSFT(KC_INSERT) , KC_BSPACE         ,
+  KC_NO             , V_A   , KC_NO          , V_D              , KC_NO       , KC_NO    /*              ,       , */    , KC_LEFT   , KC_DOWN        , KC_UP            , KC_RIGHT , ST_MACRO_31     , KC_NO             ,
+  MO(_NORMAL_SHIFT) , KC_NO , KC_DELETE      , V_C              , TO(_VISUAL) , LCTL(KC_LEFT)         /* ,       , */    , KC_F3     , KC_APPLICATION , LSFT(KC_TAB)     , KC_TAB   , LCTL(KC_F)      , MO(_NORMAL_SHIFT) ,
+  MO(_NORMAL_TMP)   , KC_NO , ALT_T(KC_HOME) , MO(_NORMAL_CTRL) , KC_NO       , MO(_SYML)                , KC_NO , KC_NO , MO(_SYMR) , KC_NO          , MO(_NORMAL_CTRL) , KC_END   , KC_NO           , MO(_NUM)          ,
+   /*               ,       ,                , */ KC_NO         , KC_NO       , KC_NO                    , KC_NO , KC_NO , KC_NO     , KC_NO          , KC_NO /*         ,          , */
   )                 ,
 
  [_VISUAL] = LAYOUT(
-  V_ESC          , KC_NO , V_W           , LSFT(LCTL(KC_RIGHT)) , KC_NO , KC_NO         /*               ,       , */    , ST_MACRO_YANK , KC_NO         , V_I           , KC_NO          , ST_MACRO_PUT , SV_DELETE ,
-  KC_NO          , V_A   , KC_NO         , SV_DELETE            , KC_NO , KC_NO    /*                    ,       , */    , LSFT(KC_LEFT) , LSFT(KC_DOWN) , LSFT(KC_UP)   , LSFT(KC_RIGHT) , KC_NO        , KC_NO     ,
-  KC_LSHIFT      , KC_NO , SV_CUT        , SV_CHANGE            , KC_NO , LSFT(LCTL(KC_LEFT))         /* ,       , */    , KC_NO         , KC_NO         , KC_NO         , KC_NO          , KC_NO        , KC_NO     ,
-  KC_TRANSPARENT , KC_NO , LSFT(KC_HOME) , KC_NO                , KC_NO , KC_NO                          , KC_NO , KC_NO , LSFT(KC_HOME) , LSFT(KC_PGDN) , LSFT(KC_PGUP) , LSFT(KC_END)   , KC_NO        , KC_NO     ,
-   /*            ,       ,               , */ KC_NO             , KC_NO , KC_NO                          , KC_NO , KC_NO , KC_NO         , KC_NO         , KC_NO /*      ,                , */
-  )              ,
+  V_ESC     , KC_NO , V_W           , LSFT(LCTL(KC_RIGHT)) , KC_NO , KC_NO         /*               ,       , */    , ST_MACRO_YANK , KC_NO         , V_I           , KC_NO          , ST_MACRO_PUT , SV_DELETE ,
+  KC_NO     , V_A   , KC_NO         , SV_DELETE            , KC_NO , KC_NO    /*                    ,       , */    , LSFT(KC_LEFT) , LSFT(KC_DOWN) , V_K   , LSFT(KC_RIGHT) , KC_NO        , KC_NO     ,
+  KC_LSHIFT , KC_NO , SV_CUT        , SV_CHANGE            , KC_NO , LSFT(LCTL(KC_LEFT))         /* ,       , */    , KC_NO         , KC_NO         , KC_NO         , KC_NO          , KC_NO        , KC_NO     ,
+  KC_NO     , KC_NO , LSFT(KC_HOME) , KC_NO                , KC_NO , KC_NO                          , KC_NO , KC_NO , LSFT(KC_HOME) , LSFT(KC_PGDN) , LSFT(KC_PGUP) , LSFT(KC_END)   , KC_NO        , KC_NO     ,
+   /*       ,       ,               , */ KC_NO             , KC_NO , KC_NO                          , KC_NO , KC_NO , KC_NO         , KC_NO         , KC_NO /*      ,                , */
+  )         ,
 
  [_NORMAL_SHIFT] = LAYOUT(
   KC_ESCAPE      , KC_NO , KC_NO     , KC_NO    , LCTL(KC_Y)           , KC_NO /*        ,       , */    , KC_NO , KC_NO , V_I      , V_O   , KC_NO , LSFT(KC_BSPACE) ,
@@ -777,6 +785,8 @@ bool m_ac_enabled = false;
 bool g_ac_enabled = false;
 bool dollar_ac_enabled = false;
 
+bool wasSelectLine = false;
+
 bool ac_is_something_enabled = false;
 
 void add_last_key(uint16_t keycode) {
@@ -1096,6 +1106,7 @@ switch (keycode) {
       layer_clear();
       /* tap_code(KC_F18); */
       layer_on(_VISUAL);
+      wasSelectLine = true;
     }
     break;
     case ST_MACRO_1:
@@ -1899,7 +1910,9 @@ switch (keycode) {
               /* } */
               clear_last_keys_vim();
               layer_clear();
-              layer_on(_NORMAL);
+              if (!IS_LAYER_ON(_VISUAL)) {
+                  layer_on(_NORMAL);
+              }
           } else {
               add_last_key_vim(keycode);
           //atmp debug
@@ -1916,29 +1929,79 @@ switch (keycode) {
           //atmp end
           }
 
-          if (last_keys_vim[0] == V_I) {
+          if (last_keys_vim[0] == V_Y) {
+
+          } else if (last_keys_vim[0] == V_K) {
+              if (IS_LAYER_ON(_VISUAL)) {
+                  //@fixme Maybe this is slow. Remove the clear keys of so
+                  clear_last_keys_vim();
+                  if (wasSelectLine == true) {
+                      // We selected the line Home, Shift + Down, but now we need to select it and go up
+
+                      // If we are on the last line, the cursor is still on the same line, but not on the line below
+                      // To once to left to go to the above line if we are on the next one
+                      // The only problem is if it was the last line and it was empty
+                      tap_code16(KC_LEFT);
+                      tap_code16(KC_END);
+                      tap_code16(LSFT(KC_HOME));
+                      tap_code16(LSFT(KC_HOME));
+                      tap_code16(LSFT(KC_UP));
+                  } else {
+                      tap_code16(LSFT(KC_UP));
+                  }
+              } else {
+                  clear_last_keys_vim();
+                  tap_code16(KC_UP);
+              }
+          } else if (last_keys_vim[0] == V_W && (last_keys_vim[1] == V_I || last_keys_vim[1] == V_A) && (last_keys_vim[2] == V_Y || last_keys_vim[2] == V_D || last_keys_vim[2] == V_C)) {
+              if (IS_LAYER_ON(_NORMAL)) {
+                  tap_code16(LCTL(KC_LEFT));
+                  tap_code16(LSFT(LCTL(KC_RIGHT)));
+                  if (last_keys_vim[2] == V_Y) {
+                      clear_last_keys_vim();
+                      tap_code16(LCTL(KC_INSERT));
+                  } else if (last_keys_vim[2] == V_D) {
+                      clear_last_keys_vim();
+                      tap_code16(KC_DELETE);
+                  } else if (last_keys_vim[2] == V_D) {
+                      clear_last_keys_vim();
+                      tap_code16(KC_DELETE);
+                      layer_clear();
+                      layer_on(_QWERTY_VIM);
+                  }
+              }
+          } else if (last_keys_vim[0] == V_W && (last_keys_vim[1] == V_I || last_keys_vim[1] == V_A)) {
+              if (IS_LAYER_ON(_VISUAL)) {
+                  clear_last_keys_vim();
+                  /* layer_on(_QWERTY_VIM); */
+                  tap_code16(LCTL(KC_LEFT));
+                  tap_code16(LSFT(LCTL(KC_RIGHT)));
+                  /* layer_clear(); */
+                  /* layer_on(_VISUAL); */
+              }
+          } else if (last_keys_vim[0] == V_I && !(last_keys_vim[1] == V_Y || last_keys_vim[1] == V_D || last_keys_vim[1] == V_C)) {
               if (IS_LAYER_ON(_NORMAL_SHIFT)) {
                   clear_last_keys_vim();
-                  /* layer_on(_QWERTY); */
+                  /* layer_on(_QWERTY_VIM); */
                   tap_code16(KC_END);
                   tap_code16(KC_HOME);
                   layer_clear();
-                  layer_on(_QWERTY);
+                  layer_on(_QWERTY_VIM);
               } else if (IS_LAYER_ON(_NORMAL)) {
                   layer_clear();
-                  layer_on(_QWERTY);
+                  layer_on(_QWERTY_VIM);
               }
-          } else if (last_keys_vim[0] == V_A) {
+          } else if (last_keys_vim[0] == V_A && !(last_keys_vim[1] == V_Y || last_keys_vim[1] == V_D || last_keys_vim[1] == V_C)) {
               if (IS_LAYER_ON(_NORMAL_SHIFT)) {
                   clear_last_keys_vim();
-                  /* layer_on(_QWERTY); */
+                  /* layer_on(_QWERTY_VIM); */
                   tap_code16(KC_END);
                   layer_clear();
-                  layer_on(_QWERTY);
+                  layer_on(_QWERTY_VIM);
               } else if (IS_LAYER_ON(_NORMAL)) {
                   clear_last_keys_vim();
                   layer_clear();
-                  layer_on(_QWERTY);
+                  layer_on(_QWERTY_VIM);
               }
           } else if (last_keys_vim[0] == V_O) {
                if (IS_LAYER_ON(_NORMAL_SHIFT)) {
@@ -1949,33 +2012,28 @@ switch (keycode) {
                   tap_code16(KC_ENTER);
                   tap_code16(KC_UP);
                   layer_clear();
-                  layer_on(_QWERTY);
+                  layer_on(_QWERTY_VIM);
               } else if (IS_LAYER_ON(_NORMAL)) {
                   clear_last_keys_vim();
                   tap_code16(KC_END);
                   tap_code16(KC_ENTER);
                   layer_clear();
-                  layer_on(_QWERTY);
-              }
-          } else if (last_keys_vim[0] == V_W && (last_keys_vim[1] == V_I || last_keys_vim[1] == V_A)) {
-              if (IS_LAYER_ON(_VISUAL)) {
-                  clear_last_keys_vim();
-                  /* layer_on(_QWERTY); */
-                  tap_code16(LCTL(KC_LEFT));
-                  tap_code16(LSFT(LCTL(KC_RIGHT)));
-                  /* layer_clear(); */
-                  /* layer_on(_VISUAL); */
+                  layer_on(_QWERTY_VIM);
               }
           } else if (last_keys_vim[0] == V_W) {
               if (IS_LAYER_ON(_VISUAL)) {
                   /* clear_last_keys_vim(); */
-                  /* layer_on(_QWERTY); */
+                  /* layer_on(_QWERTY_VIM); */
                   tap_code16(LSFT(LCTL(KC_RIGHT)));
                   /* layer_clear(); */
                   /* layer_on(_VISUAL); */
+              } else if (IS_LAYER_ON(_NORMAL)) {
+                  tap_code16(LCTL(KC_RIGHT));
               }
           } else {
           }
+
+          wasSelectLine = false;
       }
       break;
     default:
@@ -2018,12 +2076,14 @@ return true;
 //     }
 //   return state;
 //
+bool wasVimLayer = false;
 
 layer_state_t layer_state_set_user(layer_state_t state) {
     switch (get_highest_layer(state)) {
         case _NORMAL:
             if (IS_LAYER_ON_STATE(state, _NORMAL)) {
                 tap_code(KC_F18);
+                wasVimLayer = true;
             } else {
                 /* tap_code(KC_F17); */
             }
@@ -2031,13 +2091,26 @@ layer_state_t layer_state_set_user(layer_state_t state) {
         case _VISUAL:
             if (IS_LAYER_ON_STATE(state, _VISUAL)) {
                 tap_code(KC_F19);
+                wasVimLayer = true;
             } else {
                 /* tap_code(KC_F17); */
             }
             break;
+        case _QWERTY_VIM:
+            if (IS_LAYER_ON_STATE(state, _QWERTY_VIM)) {
+                // Do not send F17 if we are returning from _NORMAL_TMP
+                tap_code(KC_F20);
+                wasVimLayer = true;
+            } else {
+                /* tap_code(KC_F17); */
+            }
         case _QWERTY:
             if (IS_LAYER_ON_STATE(state, _QWERTY)) {
-                tap_code(KC_F17);
+                // Do not send F17 if we are returning from _NORMAL_TMP
+                if (wasVimLayer == true) {
+                    tap_code(KC_F17);
+                }
+                wasVimLayer = false;
             } else {
                 /* tap_code(KC_F17); */
             }
