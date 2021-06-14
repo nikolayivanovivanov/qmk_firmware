@@ -36,9 +36,11 @@ extern uint8_t is_master;
 #define _DBGL 7
 #define _NUM 8
 #define _FN 9
-#define _NORMAL_CTRL 10
-#define _VISUAL 11
-#define _NORMAL_SHIFT 12
+#define _NORMAL_SHIFT 10
+#define _NORMAL_CTRL 11
+#define _VISUAL 12
+#define _VISUAL_SHIFT 13
+#define _VISUAL_CTRL 14
 
 /* #define _QWERTY 0 */
 /* #define _NORMAL 1 */
@@ -428,9 +430,9 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
   // d switches to _D layer
  [_NORMAL] = LAYOUT(
   V_ESC             , KC_NO , V_W       , LCTL(KC_RIGHT)   , KC_NO       , KC_NO         /*         ,       , */      , V_Y       , LCTL(KC_Z)     , V_I              , V_O      , LSFT(KC_INSERT) , KC_BSPACE         ,
-  KC_NO             , V_A   , KC_NO     , V_D              , KC_NO       , KC_NO    /*              ,       , */      , KC_LEFT   , KC_DOWN        , KC_UP            , KC_RIGHT , ST_MACRO_31     , KC_NO             ,
+  KC_NO             , V_A   , KC_NO     , V_D              , KC_NO       , V_G    /*                ,       , */      , KC_LEFT   , KC_DOWN        , KC_UP            , KC_RIGHT , KC_NO           , KC_NO             ,
   MO(_NORMAL_SHIFT) , KC_NO , KC_DELETE , V_C              , TO(_VISUAL) , LCTL(KC_LEFT)         /* ,       , */      , KC_F3     , KC_APPLICATION , LSFT(KC_TAB)     , KC_TAB   , LCTL(KC_F)      , MO(_NORMAL_SHIFT) ,
-  MO(_NORMAL_TMP)   , KC_NO , KC_HOME   , MO(_NORMAL_CTRL) , KC_NO       , MO(_SYML)                , KC_NO , KC_NO   , MO(_SYMR) , KC_NO          , MO(_NORMAL_CTRL) , KC_END   , KC_NO           , MO(_NUM)          ,
+  MO(_NORMAL_TMP)   , KC_NO , KC_HOME   , MO(_NORMAL_CTRL) , KC_NO       , MO(_SYML)                , KC_NO , KC_NO   , MO(_SYMR) , KC_NO          , MO(_NORMAL_CTRL) , KC_END   , KC_NO           , KC_NO             ,
    /*               ,       ,           , */ KC_NO         , KC_NO       , KC_NO                    , KC_NO , V_SPACE , KC_NO     , KC_NO          , KC_NO /*         ,          , */
   )                 ,
 
@@ -442,29 +444,44 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
    /*         ,       ,           , */ KC_NO , KC_NO    , KC_NO            , KC_LSHIFT , ST_MACRO_STRUCT , KC_NO           , KC_NO          , KC_NO /*     ,          , */
   )           ,
 
- [_VISUAL] = LAYOUT(
-  V_ESC     , KC_NO , V_W           , LSFT(LCTL(KC_RIGHT)) , KC_NO , KC_NO         /*               ,       , */      , V_Y , KC_NO         , V_I      , KC_NO          , ST_MACRO_PUT , SV_DELETE ,
-  KC_NO     , V_A   , KC_NO         , V_D                  , KC_NO , KC_NO    /*                    ,       , */      , LSFT(KC_LEFT) , LSFT(KC_DOWN) , V_K      , LSFT(KC_RIGHT) , KC_NO        , KC_NO     ,
-  KC_LSHIFT , KC_NO , SV_CUT        , V_C                  , KC_NO , LSFT(LCTL(KC_LEFT))         /* ,       , */      , KC_NO         , KC_NO         , KC_NO    , KC_NO          , KC_NO        , KC_NO     ,
-  KC_NO     , KC_NO , LSFT(KC_HOME) , KC_NO                , KC_NO , KC_NO                          , KC_NO , KC_NO   , KC_NO         , KC_NO         , KC_NO    , KC_NO          , KC_NO        , KC_NO     ,
-   /*       ,       ,               , */ KC_NO             , KC_NO , KC_NO                          , KC_NO , V_SPACE , KC_NO         , KC_NO         , KC_NO /* ,                , */
-  )         ,
-
  [_NORMAL_SHIFT] = LAYOUT(
-  KC_ESCAPE      , KC_NO , KC_NO     , KC_NO    , LCTL(KC_Y)           , KC_NO /*        ,       , */    , KC_NO , KC_NO , V_I      , V_O   , KC_NO , LSFT(KC_BSPACE) ,
-  KC_NO          , V_A   , KC_NO     , KC_PGDN  , KC_NO                , LCTL(KC_END) /* ,       , */    , KC_NO , KC_NO , KC_NO    , KC_NO , KC_NO , KC_NO           ,
-  KC_NO          , KC_NO , KC_BSPACE , KC_NO    , ST_MACRO_SELECT_LINE , KC_NO /*        ,       , */    , KC_NO , KC_NO , KC_NO    , KC_NO , KC_NO , KC_NO           ,
-  KC_TRANSPARENT , KC_NO , KC_NO     , KC_NO    , KC_NO                , KC_NO           , KC_NO , KC_NO , KC_NO , KC_NO , KC_NO    , KC_NO , KC_NO , LSFT(KC_ENTER)  ,
-   /*            ,       ,           , */ KC_NO , KC_NO                , KC_NO           , KC_NO , KC_NO , KC_NO , KC_NO , KC_NO /* ,       , */
+  KC_ESCAPE      , KC_NO , KC_NO     , KC_NO    , LCTL(KC_Y)           , KC_NO /* ,       , */    , KC_NO , KC_NO , V_I      , V_O   , KC_NO , LSFT(KC_BSPACE) ,
+  KC_NO          , V_A   , KC_NO     , KC_PGDN  , KC_NO                , V_G /*   ,       , */    , KC_NO , KC_NO , KC_NO    , KC_NO , KC_NO , KC_NO           ,
+  KC_NO          , KC_NO , KC_BSPACE , KC_NO    , ST_MACRO_SELECT_LINE , KC_NO /* ,       , */    , KC_NO , KC_NO , KC_NO    , KC_NO , KC_NO , KC_NO           ,
+  KC_TRANSPARENT , KC_NO , KC_NO     , KC_NO    , KC_NO                , KC_NO    , KC_NO , KC_NO , KC_NO , KC_NO , KC_NO    , KC_NO , KC_NO , LSFT(KC_ENTER)  ,
+   /*            ,       ,           , */ KC_NO , KC_NO                , KC_NO    , KC_NO , KC_NO , KC_NO , KC_NO , KC_NO /* ,       , */
   )              ,
 
  [_NORMAL_CTRL] = LAYOUT(
-  RCTL(KC_ESCAPE) , KC_NO      , KC_NO     , KC_NO    , LCTL(KC_Y)  , KC_NO /* ,       , */    , KC_NO , KC_PGUP , KC_NO    , KC_NO , KC_NO , KC_NO          ,
-  KC_NO           , RCTL(KC_A) , KC_NO     , KC_PGDN  , KC_NO       , KC_NO /* ,       , */    , KC_NO , KC_NO   , KC_NO    , KC_NO , KC_NO , KC_NO          ,
-  KC_NO           , KC_NO      , KC_BSPACE , KC_NO    , TO(_VISUAL) , KC_NO /* ,       , */    , KC_NO , KC_NO   , KC_NO    , KC_NO , KC_NO , KC_NO          ,
-  KC_TRANSPARENT  , KC_NO      , KC_NO     , KC_NO    , KC_NO       , KC_NO    , KC_NO , KC_NO , KC_NO , KC_NO   , KC_NO    , KC_NO , KC_NO , LCTL(KC_ENTER) ,
-   /*             ,            ,           , */ KC_NO , KC_NO       , KC_NO    , KC_NO , KC_NO , KC_NO , KC_NO   , KC_NO /* ,       , */
+  RCTL(KC_ESCAPE) , KC_NO , KC_NO     , KC_NO    , LCTL(KC_Y)  , KC_NO /* ,       , */    , KC_NO , KC_PGUP , KC_NO    , KC_NO , KC_NO , KC_NO          ,
+  KC_NO           , V_A   , KC_NO     , KC_PGDN  , KC_NO       , KC_NO /* ,       , */    , KC_NO , KC_NO   , KC_NO    , KC_NO , KC_NO , KC_NO          ,
+  KC_NO           , KC_NO , KC_BSPACE , KC_NO    , TO(_VISUAL) , KC_NO /* ,       , */    , KC_NO , KC_NO   , KC_NO    , KC_NO , KC_NO , KC_NO          ,
+  KC_TRANSPARENT  , KC_NO , KC_NO     , KC_NO    , KC_NO       , KC_NO    , KC_NO , KC_NO , KC_NO , KC_NO   , KC_NO    , KC_NO , KC_NO , LCTL(KC_ENTER) ,
+   /*             ,       ,           , */ KC_NO , KC_NO       , KC_NO    , KC_NO , KC_NO , KC_NO , KC_NO   , KC_NO /* ,       , */
   )               ,
+
+ [_VISUAL] = LAYOUT(
+  V_ESC             , KC_NO , V_W           , LSFT(LCTL(KC_RIGHT)) , KC_NO , KC_NO         /*               ,       , */      , V_Y           , KC_NO         , V_I              , KC_NO          , ST_MACRO_PUT , SV_DELETE         ,
+  KC_NO             , V_A   , KC_NO         , V_D                  , KC_NO , V_G    /*                      ,       , */      , LSFT(KC_LEFT) , LSFT(KC_DOWN) , V_K              , LSFT(KC_RIGHT) , KC_NO        , KC_NO             ,
+  MO(_VISUAL_SHIFT) , KC_NO , SV_CUT        , V_C                  , KC_NO , LSFT(LCTL(KC_LEFT))         /* ,       , */      , KC_NO         , KC_NO         , KC_NO            , KC_NO          , KC_NO        , MO(_VISUAL_SHIFT) ,
+  KC_NO             , KC_NO , LSFT(KC_HOME) , MO(_VISUAL_CTRL)     , KC_NO , KC_NO                          , KC_NO , KC_NO   , KC_NO         , KC_NO         , MO(_VISUAL_CTRL) , KC_NO          , KC_NO        , KC_NO             ,
+   /*               ,       ,               , */ KC_NO             , KC_NO , KC_NO                          , KC_NO , V_SPACE , KC_NO         , KC_NO         , KC_NO /*         ,                , */
+  )                 ,
+
+ [_VISUAL_SHIFT] = LAYOUT(
+  V_ESC , KC_NO , KC_NO         , KC_NO    , KC_NO , KC_NO         /* ,       , */      , KC_NO , KC_NO , KC_NO    , KC_NO        , KC_NO , KC_NO ,
+  KC_NO , KC_NO , KC_NO         , KC_NO    , KC_NO , V_G    /*      ,       , */      , KC_NO , KC_NO , KC_NO    , KC_NO        , KC_NO , KC_NO ,
+  KC_NO , KC_NO , KC_NO         , KC_NO    , KC_NO , KC_NO         /* ,       , */      , KC_NO , KC_NO , KC_NO    , KC_NO        , KC_NO , KC_NO ,
+  KC_NO , KC_NO , LSFT(KC_HOME) , KC_NO    , KC_NO , KC_NO            , KC_NO , KC_NO   , KC_NO , KC_NO , KC_NO    , LSFT(KC_END) , KC_NO , KC_NO ,
+   /*   ,       ,               , */ KC_NO , KC_NO , KC_NO            , KC_NO , V_SPACE , KC_NO , KC_NO , KC_NO /* ,              , */
+  )     ,
+ [_VISUAL_CTRL] = LAYOUT(
+  V_ESC , KC_NO , KC_NO         , KC_NO    , KC_NO , KC_NO         /* ,       , */      , KC_NO , V_U   , KC_NO    , KC_NO , KC_NO , KC_NO ,
+  KC_NO , V_A   , KC_NO         , V_D      , KC_NO , KC_NO    /*      ,       , */      , KC_NO , KC_NO , V_K      , KC_NO , KC_NO , KC_NO ,
+  KC_NO , KC_NO , KC_NO         , KC_NO    , KC_NO , KC_NO         /* ,       , */      , KC_NO , KC_NO , KC_NO    , KC_NO , KC_NO , KC_NO ,
+  KC_NO , KC_NO , LSFT(KC_HOME) , KC_NO    , KC_NO , KC_NO            , KC_NO , KC_NO   , KC_NO , KC_NO , KC_NO    , KC_NO , KC_NO , KC_NO ,
+   /*   ,       ,               , */ KC_NO , KC_NO , KC_NO            , KC_NO , V_SPACE , KC_NO , KC_NO , KC_NO /* ,       , */
+  )     ,
  /* [_NORMAL] = LAYOUT( */
  /*  TO(_QWERTY)    , KC_LGUI        , KC_LALT    , KC_LCTRL   , LCTL(KC_Y) , KC_NO         /1*         ,          , *1/                     , LCTL(KC_INSERT) , LCTL(KC_Z)     , KC_HOME       , KC_END         , LSFT(KC_INSERT) , KC_BSPACE   , */
  /*  KC_NO          , KC_APPLICATION , KC_NO      , KC_DELETE  , KC_NO      , KC_NO    /1*              ,          , *1/                     , KC_LEFT         , KC_DOWN        , KC_UP         , KC_RIGHT       , ST_MACRO_31     , KC_DELETE   , */
@@ -1945,6 +1962,14 @@ switch (keycode) {
               clear_last_keys_vim();
               layer_clear();
               layer_on(_NORMAL);
+           } else if (last_keys_vim[0] == V_D && IS_LAYER_ON(_VISUAL_CTRL)) {
+              //@fixme Maybe this is slow. Remove the clear keys of so
+              tap_code16(LSFT(KC_PGDN));
+              clear_last_keys_vim();
+           } else if (last_keys_vim[0] == V_U && IS_LAYER_ON(_VISUAL_CTRL)) {
+              //@fixme Maybe this is slow. Remove the clear keys of so
+              tap_code16(LSFT(KC_PGUP));
+              clear_last_keys_vim();
            } else if (last_keys_vim[0] == V_D && IS_LAYER_ON(_VISUAL)) {
               //@fixme Maybe this is slow. Remove the clear keys of so
               if (last_keys_vim[1] == V_SPACE) {
@@ -2069,7 +2094,13 @@ switch (keycode) {
                   layer_on(_QWERTY_VIM);
               }
           } else if (last_keys_vim[0] == V_A && !(last_keys_vim[1] == V_Y || last_keys_vim[1] == V_D || last_keys_vim[1] == V_C)) {
-              if (IS_LAYER_ON(_NORMAL_SHIFT)) {
+              if (IS_LAYER_ON(_NORMAL_CTRL)) {
+                  clear_last_keys_vim();
+                  /* layer_on(_QWERTY_VIM); */
+                  tap_code16(LCTL(KC_A));
+                  layer_clear();
+                  layer_on(_VISUAL);
+              } else if (IS_LAYER_ON(_NORMAL_SHIFT)) {
                   clear_last_keys_vim();
                   /* layer_on(_QWERTY_VIM); */
                   tap_code16(KC_END);
@@ -2096,6 +2127,22 @@ switch (keycode) {
                   tap_code16(KC_ENTER);
                   layer_clear();
                   layer_on(_QWERTY_VIM);
+              }
+          } else if (last_keys_vim[0] == V_G && last_keys_vim[1] == V_G) {
+              if (IS_LAYER_ON(_NORMAL)) {
+                  tap_code16(LCTL(KC_HOME));
+                  clear_last_keys_vim();
+              } else if (IS_LAYER_ON(_VISUAL)) {
+                  tap_code16(LSFT(LCTL(KC_HOME)));
+                  clear_last_keys_vim();
+              }
+          } else if (last_keys_vim[0] == V_G) {
+              if (IS_LAYER_ON(_VISUAL_SHIFT)) {
+                  tap_code16(LSFT(LCTL(KC_END)));
+                  clear_last_keys_vim();
+              } else if (IS_LAYER_ON(_NORMAL_SHIFT)) {
+                  tap_code16(LCTL(KC_END));
+                  clear_last_keys_vim();
               }
           } else if (last_keys_vim[0] == V_W) {
               if (IS_LAYER_ON(_VISUAL)) {
