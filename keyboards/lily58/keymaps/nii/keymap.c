@@ -429,10 +429,10 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
   // r replace deleted the char under the cursor and switch to _ONESHOT_INSERT, where any key, prints the char and switches back to _NORMAL
   // d switches to _D layer
  [_NORMAL] = LAYOUT(
-  V_ESC             , KC_NO , V_W       , LCTL(KC_RIGHT)   , KC_NO       , KC_NO         /*         ,       , */      , V_Y       , LCTL(KC_Z)     , V_I              , V_O      , LSFT(KC_INSERT) , KC_BSPACE         ,
-  KC_NO             , V_A   , KC_NO     , V_D              , KC_NO       , V_G    /*                ,       , */      , KC_LEFT   , KC_DOWN        , KC_UP            , KC_RIGHT , KC_NO           , KC_NO             ,
-  MO(_NORMAL_SHIFT) , KC_NO , KC_DELETE , V_C              , TO(_VISUAL) , LCTL(KC_LEFT)         /* ,       , */      , KC_F3     , KC_APPLICATION , LSFT(KC_TAB)     , KC_TAB   , LCTL(KC_F)      , MO(_NORMAL_SHIFT) ,
-  MO(_NORMAL_TMP)   , KC_NO , KC_HOME   , MO(_NORMAL_CTRL) , KC_NO       , MO(_SYML)                , KC_NO , KC_NO   , MO(_SYMR) , KC_NO          , MO(_NORMAL_CTRL) , KC_END   , KC_NO           , KC_NO             ,
+  V_ESC             , KC_NO , V_W       , LCTL(KC_RIGHT)   , KC_NO       , KC_NO         /*         ,       , */      , V_Y       , LCTL(KC_Z)     , V_I              , V_O      , V_P        , KC_BSPACE         ,
+  KC_NO             , V_A   , KC_NO     , V_D              , KC_NO       , V_G    /*                ,       , */      , KC_LEFT   , KC_DOWN        , KC_UP            , KC_RIGHT , KC_NO      , KC_NO             ,
+  MO(_NORMAL_SHIFT) , KC_NO , KC_DELETE , V_C              , TO(_VISUAL) , LCTL(KC_LEFT)         /* ,       , */      , KC_F3     , KC_APPLICATION , LSFT(KC_TAB)     , KC_TAB   , LCTL(KC_F) , MO(_NORMAL_SHIFT) ,
+  MO(_NORMAL_TMP)   , KC_NO , KC_HOME   , MO(_NORMAL_CTRL) , KC_NO       , MO(_SYML)                , KC_NO , KC_NO   , MO(_SYMR) , KC_NO          , MO(_NORMAL_CTRL) , KC_END   , KC_NO      , KC_NO             ,
    /*               ,       ,           , */ KC_NO         , KC_NO       , KC_NO                    , KC_NO , V_SPACE , KC_NO     , KC_NO          , KC_NO /*         ,          , */
   )                 ,
 
@@ -445,7 +445,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
   )           ,
 
  [_NORMAL_SHIFT] = LAYOUT(
-  KC_ESCAPE      , KC_NO , KC_NO     , KC_NO    , LCTL(KC_Y)           , KC_NO /* ,       , */    , KC_NO , KC_NO , V_I      , V_O   , KC_NO , LSFT(KC_BSPACE) ,
+  KC_ESCAPE      , KC_NO , KC_NO     , KC_NO    , LCTL(KC_Y)           , KC_NO /* ,       , */    , KC_NO , KC_NO , V_I      , V_O   , V_P   , LSFT(KC_BSPACE) ,
   KC_NO          , V_A   , KC_NO     , KC_PGDN  , KC_NO                , V_G /*   ,       , */    , KC_NO , KC_NO , KC_NO    , KC_NO , KC_NO , KC_NO           ,
   KC_NO          , KC_NO , KC_BSPACE , KC_NO    , ST_MACRO_SELECT_LINE , KC_NO /* ,       , */    , KC_NO , KC_NO , KC_NO    , KC_NO , KC_NO , KC_NO           ,
   KC_TRANSPARENT , KC_NO , KC_NO     , KC_NO    , KC_NO                , KC_NO    , KC_NO , KC_NO , KC_NO , KC_NO , KC_NO    , KC_NO , KC_NO , LSFT(KC_ENTER)  ,
@@ -803,6 +803,7 @@ bool g_ac_enabled = false;
 bool dollar_ac_enabled = false;
 
 bool wasSelectLine = false;
+bool wasYankedLine = false;
 
 bool ac_is_something_enabled = false;
 
@@ -1962,6 +1963,7 @@ switch (keycode) {
               clear_last_keys_vim();
               layer_clear();
               layer_on(_NORMAL);
+              wasYankedLine = false;
            } else if (last_keys_vim[0] == V_D && IS_LAYER_ON(_VISUAL_CTRL)) {
               //@fixme Maybe this is slow. Remove the clear keys of so
               tap_code16(LSFT(KC_PGDN));
@@ -2023,7 +2025,38 @@ switch (keycode) {
                   tap_code16(LSFT(KC_HOME));
                   /* tap_code16(LSFT(KC_UP)); */
                   tap_code16(LCTL(KC_INSERT));
+                  wasYankedLine = true;
               }
+          } else if (last_keys_vim[0] == V_P) {
+              if (IS_LAYER_ON(_NORMAL_SHIFT)) {
+                  //@fixme Maybe this is slow. Remove the clear keys of so
+                  if (wasYankedLine == true) {
+                      // Paste the line above the current one
+                      tap_code16(KC_END);
+                      tap_code16(KC_HOME);
+                      tap_code16(KC_HOME);
+                      tap_code16(KC_ENTER);
+                      tap_code16(KC_UP);
+
+                      tap_code16(LSFT(KC_INSERT));
+                  } else {
+                      tap_code16(LSFT(KC_INSERT));
+                  }
+                  clear_last_keys_vim();
+              } else if (IS_LAYER_ON(_NORMAL)) {
+                  //@fixme Maybe this is slow. Remove the clear keys of so
+                  if (wasYankedLine == true) {
+                      // Paste the line belo the current one
+                      tap_code16(KC_END);
+                      tap_code16(KC_ENTER);
+
+                      tap_code16(LSFT(KC_INSERT));
+                  } else {
+                      tap_code16(LSFT(KC_INSERT));
+                  }
+                  clear_last_keys_vim();
+              }
+
           } else if (last_keys_vim[0] == V_K) {
               if (IS_LAYER_ON(_VISUAL)) {
                   //@fixme Maybe this is slow. Remove the clear keys of so
