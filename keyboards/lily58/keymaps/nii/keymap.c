@@ -429,7 +429,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
   // r replace deleted the char under the cursor and switch to _ONESHOT_INSERT, where any key, prints the char and switches back to _NORMAL
   // d switches to _D layer
  [_NORMAL] = LAYOUT(
-  V_ESC             , KC_NO , V_W       , LCTL(KC_RIGHT)   , KC_NO       , KC_NO         /*         ,       , */      , V_Y       , LCTL(KC_Z)     , V_I              , V_O      , V_P        , KC_BSPACE         ,
+  V_ESC             , KC_NO , V_W       , LCTL(KC_RIGHT)   , KC_DELETE       , KC_NO         /*         ,       , */      , V_Y       , LCTL(KC_Z)     , V_I              , V_O      , V_P        , KC_BSPACE         ,
   KC_NO             , V_A   , KC_NO     , V_D              , KC_NO       , V_G    /*                ,       , */      , KC_LEFT   , KC_DOWN        , KC_UP            , KC_RIGHT , KC_NO      , KC_NO             ,
   MO(_NORMAL_SHIFT) , KC_NO , KC_DELETE , V_C              , TO(_VISUAL) , LCTL(KC_LEFT)         /* ,       , */      , KC_F3     , KC_APPLICATION , LSFT(KC_TAB)     , KC_TAB   , LCTL(KC_F) , MO(_NORMAL_SHIFT) ,
   MO(_NORMAL_TMP)   , KC_NO , KC_HOME   , MO(_NORMAL_CTRL) , KC_NO       , MO(_SYML)                , KC_NO , KC_NO   , MO(_SYMR) , KC_NO          , MO(_NORMAL_CTRL) , KC_END   , KC_NO      , KC_NO             ,
@@ -461,7 +461,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
   )               ,
 
  [_VISUAL] = LAYOUT(
-  V_ESC             , KC_NO , V_W           , LSFT(LCTL(KC_RIGHT)) , KC_NO , KC_NO         /*               ,       , */      , V_Y           , KC_NO         , V_I              , KC_NO          , ST_MACRO_PUT , SV_DELETE         ,
+  V_ESC             , KC_NO , V_W           , LSFT(LCTL(KC_RIGHT)) , V_R   , KC_NO         /*               ,       , */      , V_Y           , KC_NO         , V_I              , KC_NO          , ST_MACRO_PUT , SV_DELETE         ,
   KC_NO             , V_A   , KC_NO         , V_D                  , KC_NO , V_G    /*                      ,       , */      , LSFT(KC_LEFT) , LSFT(KC_DOWN) , V_K              , LSFT(KC_RIGHT) , KC_NO        , KC_NO             ,
   MO(_VISUAL_SHIFT) , KC_NO , SV_CUT        , V_C                  , KC_NO , LSFT(LCTL(KC_LEFT))         /* ,       , */      , KC_NO         , KC_NO         , KC_NO            , KC_NO          , KC_NO        , MO(_VISUAL_SHIFT) ,
   KC_NO             , KC_NO , LSFT(KC_HOME) , MO(_VISUAL_CTRL)     , KC_NO , KC_NO                          , KC_NO , KC_NO   , KC_NO         , KC_NO         , MO(_VISUAL_CTRL) , KC_NO          , KC_NO        , KC_NO             ,
@@ -2011,9 +2011,12 @@ switch (keycode) {
                   /* tap_code16(LSFT(KC_UP)); */
                   if (last_keys_vim[2] == V_SPACE) {
                       tap_code16(LCTL(KC_X));
+                      wasYankedLine = true;
                   } else {
                       tap_code16(KC_DELETE);
                   }
+                  // Delete once again to go to the next line
+                  tap_code16(KC_DELETE);
                   clear_last_keys_vim();
               }
           } else if (last_keys_vim[0] == V_Y && last_keys_vim[1] == V_Y) {
@@ -2160,6 +2163,13 @@ switch (keycode) {
                   tap_code16(KC_ENTER);
                   layer_clear();
                   layer_on(_QWERTY_VIM);
+              }
+          } else if (last_keys_vim[0] == V_R && last_keys_vim[1] == V_G) {
+              if (IS_LAYER_ON(_VISUAL)) {
+                  tap_code16(LSFT(KC_INSERT));
+                  clear_last_keys_vim();
+                  layer_clear();
+                  layer_on(_NORMAL);
               }
           } else if (last_keys_vim[0] == V_G && last_keys_vim[1] == V_G) {
               if (IS_LAYER_ON(_NORMAL)) {
