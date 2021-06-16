@@ -402,19 +402,19 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
  */
 
  [_QWERTY] = LAYOUT(
-  TD(TD_ESC_TO_NORMAL)    , KC_Q        , KC_W           , KC_E          , KC_R     , KC_T /*     ,        , */     , KC_Y        , KC_U     , KC_I     , KC_O           , KC_P        , KC_BSPACE     ,
-  ST_MACRO_GRAVE          , KC_A        , KC_S           , KC_D          , KC_F     , KC_G /*     ,        , */     , KC_H        , KC_J     , KC_K     , KC_L           , KC_SCOLON   , ST_MACRO_QUOT ,
-  OSM(MOD_LSFT)           , KC_Z        , KC_X           , KC_C          , KC_V     , KC_B /*     ,        , */     , KC_N        , KC_M     , KC_COMM  , ST_MACRO_DOT   , KC_SLSH     , OSM(MOD_RSFT) ,
-  MO(_NORMAL_TMP)         , KC_LBRACKET , ALT_T(KC_HOME) , KC_LCTRL      , KC_MINUS , MO(_SYML)   , KC_NO  , KC_NO  , MO(_SYMR)   , KC_EQUAL , KC_RCTRL , ALGR_T(KC_END) , KC_RBRACKET , MO(_NUM)      ,
-                       /* ,             ,                , */      KC_NO , KC_NO    , TO(_NORMAL) , KC_F23 , KC_SPC , TO(_QWERTY) , KC_NO    , KC_NO /* ,                , */
+  TD(TD_ESC_TO_NORMAL)    , KC_Q        , KC_W           , KC_E          , KC_R     , KC_T /*     ,        , */     , KC_Y        , KC_U     , KC_I          , KC_O           , KC_P        , KC_BSPACE     ,
+  ST_MACRO_GRAVE          , KC_A        , KC_S           , KC_D          , KC_F     , KC_G /*     ,        , */     , KC_H        , KC_J     , KC_K          , KC_L           , KC_SCOLON   , ST_MACRO_QUOT ,
+  OSM(MOD_LSFT)           , KC_Z        , KC_X           , KC_C          , KC_V     , KC_B /*     ,        , */     , KC_N        , KC_M     , KC_COMM       , ST_MACRO_DOT   , KC_SLSH     , OSM(MOD_RSFT) ,
+  MO(_NORMAL_TMP)         , KC_LBRACKET , ALT_T(KC_HOME) , OSM(MOD_LCTL) , KC_MINUS , MO(_SYML)   , KC_NO  , KC_NO  , MO(_SYMR)   , KC_EQUAL , OSM(MOD_RCTL) , ALGR_T(KC_END) , KC_RBRACKET , MO(_NUM)      ,
+                       /* ,             ,                , */      KC_NO , KC_NO    , TO(_NORMAL) , KC_F23 , KC_SPC , TO(_QWERTY) , KC_NO    , KC_NO /*      ,                , */
 )                         ,
 
  [_QWERTY_VIM] = LAYOUT(
-  TO(_NORMAL)             , KC_Q        , KC_W           , KC_E          , KC_R     , KC_T /*     ,        , */     , KC_Y        , KC_U     , KC_I     , KC_O           , KC_P        , KC_BSPACE     ,
-  ST_MACRO_GRAVE          , KC_A        , KC_S           , KC_D          , KC_F     , KC_G /*     ,        , */     , KC_H        , KC_J     , KC_K     , KC_L           , KC_SCOLON   , ST_MACRO_QUOT ,
-  OSM(MOD_LSFT)           , KC_Z        , KC_X           , KC_C          , KC_V     , KC_B /*     ,        , */     , KC_N        , KC_M     , KC_COMM  , ST_MACRO_DOT   , KC_SLSH     , OSM(MOD_RSFT) ,
-  MO(_NORMAL_TMP)         , KC_LBRACKET , ALT_T(KC_HOME) , KC_LCTRL      , KC_MINUS , MO(_SYML)   , KC_NO  , KC_NO  , MO(_SYMR)   , KC_EQUAL , KC_RCTRL , ALGR_T(KC_END) , KC_RBRACKET , MO(_NUM)      ,
-                       /* ,             ,                , */      KC_NO , KC_NO    , TO(_NORMAL) , KC_F23 , KC_SPC , TO(_QWERTY) , KC_NO    , KC_NO /* ,                , */
+  TO(_NORMAL)             , KC_Q        , KC_W           , KC_E          , KC_R     , KC_T /*     ,        , */     , KC_Y        , KC_U     , KC_I          , KC_O           , KC_P        , KC_BSPACE     ,
+  ST_MACRO_GRAVE          , KC_A        , KC_S           , KC_D          , KC_F     , KC_G /*     ,        , */     , KC_H        , KC_J     , KC_K          , KC_L           , KC_SCOLON   , ST_MACRO_QUOT ,
+  OSM(MOD_LSFT)           , KC_Z        , KC_X           , KC_C          , KC_V     , KC_B /*     ,        , */     , KC_N        , KC_M     , KC_COMM       , ST_MACRO_DOT   , KC_SLSH     , OSM(MOD_RSFT) ,
+  MO(_NORMAL_TMP)         , KC_LBRACKET , ALT_T(KC_HOME) , OSM(MOD_LCTL) , KC_MINUS , MO(_SYML)   , KC_NO  , KC_NO  , MO(_SYMR)   , KC_EQUAL , OSM(MOD_RCTL) , ALGR_T(KC_END) , KC_RBRACKET , MO(_NUM)      ,
+                       /* ,             ,                , */      KC_NO , KC_NO    , TO(_NORMAL) , KC_F23 , KC_SPC , TO(_QWERTY) , KC_NO    , KC_NO /*      ,                , */
 )                         ,
 //  [_NORMAL] = LAYOUT(
 //   TO(_QWERTY) , KC_F1         , KC_F2         , KC_F3                                  , KC_F4      , KC_F5        /*      ,          , */                     , KC_F6    , KC_F7          , KC_F8        , KC_F9    , KC_F10        , KC_DELETE   ,
@@ -461,12 +461,12 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
   )               ,
 
  [_VISUAL] = LAYOUT(
-  V_ESC     , KC_NO , V_W           , LSFT(LCTL(KC_RIGHT)) , V_R   , KC_NO         /*               ,       , */      , V_Y           , KC_U         , V_I      , KC_NO          , ST_MACRO_PUT , SV_DELETE ,
-  KC_NO     , V_A   , KC_NO         , V_D                  , KC_NO , V_G    /*                      ,       , */      , LSFT(KC_LEFT) , LSFT(KC_DOWN) , V_K      , LSFT(KC_RIGHT) , KC_NO        , KC_NO     ,
-  OSM(MOD_LSFT) , KC_NO , SV_CUT        , V_C                  , KC_NO , LSFT(LCTL(KC_LEFT))         /* ,       , */      , KC_NO         , KC_NO         , KC_NO    , KC_NO          , KC_NO        , OSM(MOD_RSFT) ,
-  KC_NO     , KC_NO , LSFT(KC_HOME) , KC_LCTRL             , KC_NO , KC_NO                          , KC_NO , KC_NO   , KC_NO         , KC_NO         , KC_RCTRL , KC_NO          , KC_NO        , KC_NO     ,
-   /*       ,       ,               , */ KC_NO             , KC_NO , KC_NO                          , KC_NO , V_SPACE , KC_NO         , KC_NO         , KC_NO /* ,                , */
-  )         ,
+  V_ESC         , KC_NO , V_W           , LSFT(LCTL(KC_RIGHT)) , V_R   , KC_NO         /*               ,       , */      , V_Y           , V_U          , V_I           , KC_NO          , ST_MACRO_PUT , SV_DELETE     ,
+  KC_NO         , V_A   , KC_NO         , V_D                  , KC_NO , V_G    /*                      ,       , */      , LSFT(KC_LEFT) , LSFT(KC_DOWN) , V_K           , LSFT(KC_RIGHT) , KC_NO        , KC_NO         ,
+  OSM(MOD_LSFT) , KC_NO , SV_CUT        , V_C                  , KC_NO , LSFT(LCTL(KC_LEFT))         /* ,       , */      , KC_NO         , KC_NO         , KC_NO         , KC_NO          , KC_NO        , OSM(MOD_RSFT) ,
+  KC_NO         , KC_NO , LSFT(KC_HOME) , OSM(MOD_LCTL)        , KC_NO , KC_NO                          , KC_NO , KC_NO   , KC_NO         , KC_NO         , OSM(MOD_RCTL) , KC_NO          , KC_NO        , KC_NO         ,
+   /*           ,       ,               , */ KC_NO             , KC_NO , KC_NO                          , KC_NO , V_SPACE , KC_NO         , KC_NO         , KC_NO /*      ,                , */
+  )             ,
 
  /* [_VISUAL_SHIFT] = LAYOUT( */
  /*  V_ESC , KC_NO , KC_NO         , KC_NO    , KC_NO , KC_NO         /1* ,       , *1/      , KC_NO , KC_NO , KC_NO    , KC_NO        , KC_NO , KC_NO , */
@@ -1964,13 +1964,20 @@ switch (keycode) {
               layer_on(_NORMAL);
               wasYankedLine = false;
            } else if (last_keys_vim[0] == V_D && IS_LAYER_ON(_VISUAL) && (keyboard_report->mods & MOD_MASK_CTRL) != 0) {
-              //@fixme Maybe this is slow. Remove the clear keys of so
-              tap_code16(LSFT(KC_PGDN));
-              clear_last_keys_vim();
+               uint8_t current_mods = keyboard_report->mods;
+               // clear_mods();
+               del_mods(keyboard_report->mods);
+               tap_code16(LSFT(KC_PGDN));
+               add_mods(current_mods);
+               add_mods(current_mods);
+               clear_last_keys_vim();
            } else if (last_keys_vim[0] == V_U && IS_LAYER_ON(_VISUAL) && (keyboard_report->mods & MOD_MASK_CTRL) != 0) {
-              //@fixme Maybe this is slow. Remove the clear keys of so
-              tap_code16(LSFT(KC_PGUP));
-              clear_last_keys_vim();
+               uint8_t current_mods = keyboard_report->mods;
+               // clear_mods();
+               del_mods(keyboard_report->mods);
+               tap_code16(LSFT(KC_PGUP));
+               add_mods(current_mods);
+               clear_last_keys_vim();
            } else if (last_keys_vim[0] == V_D && IS_LAYER_ON(_VISUAL)) {
               //@fixme Maybe this is slow. Remove the clear keys of so
               if (last_keys_vim[1] == V_SPACE) {
