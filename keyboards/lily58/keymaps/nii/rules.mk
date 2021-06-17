@@ -2,6 +2,13 @@
 #   change to "no" to disable the options, or define them in the Makefile in
 #   the appropriate keymap folder that will get included automatically
 #
+
+# https://docs.qmk.fm/#/config_options?id=features-that-can-be-disabled
+LTO_ENABLE = no
+NO_ACTION_MACRO = yes
+NO_ACTION_FUNCTION = yes
+LEADER_ENABLE = no
+
 BOOTMAGIC_ENABLE = no       # Virtual DIP switch configuration
 MOUSEKEY_ENABLE = no        # Mouse keys
 EXTRAKEY_ENABLE = yes        # Audio control and System control
