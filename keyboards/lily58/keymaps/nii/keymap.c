@@ -403,11 +403,11 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
  */
 
  [_QWERTY] = LAYOUT(
-  TD(TD_ESC_TO_NORMAL)    , KC_Q        , KC_W           , KC_E            , KC_R     , KC_T /*   ,        , */     , KC_Y      , KC_U     , KC_I          , KC_O           , KC_P        , KC_BSPACE     ,
-  ST_MACRO_GRAVE          , KC_A        , KC_S           , KC_D            , KC_F     , KC_G /*   ,        , */     , KC_H      , KC_J     , KC_K          , KC_L           , KC_SCOLON   , ST_MACRO_QUOT ,
-  OSM(MOD_LSFT)           , KC_Z        , KC_X           , KC_C            , KC_V     , KC_B /*   ,        , */     , KC_N      , KC_M     , KC_COMM       , ST_MACRO_DOT   , KC_SLSH     , OSM(MOD_RSFT) ,
-  MO(_NORMAL_TMP)         , KC_LBRACKET , ALT_T(KC_HOME) , OSM(MOD_LCTL)   , KC_MINUS , MO(_SYML) , KC_NO  , KC_NO  , MO(_SYMR) , KC_EQUAL , OSM(MOD_RCTL) , ALGR_T(KC_END) , KC_RBRACKET , MO(_NUM)      ,
-                       /* ,             ,                , */      KC_LALT , KC_LCTRL , KC_LGUI   , KC_F23 , KC_SPC , KC_RGUI   , KC_RCTRL , KC_ALGR /*    ,                , */
+  TD(TD_ESC_TO_NORMAL)    , KC_Q       , KC_W         , KC_E            , KC_R          , KC_T /*  ,           , */     , KC_Y    , KC_U      , KC_I       , KC_O          , KC_P           , KC_BSPACE     ,
+  ST_MACRO_GRAVE          , KC_A       , KC_S         , KC_D            , KC_F          , KC_G /*  ,           , */     , KC_H    , KC_J      , KC_K       , KC_L          , KC_SCOLON      , ST_MACRO_QUOT ,
+  OSM(MOD_LSFT)           , KC_Z       , KC_X         , KC_C            , KC_V          , KC_B /*  ,           , */     , KC_N    , KC_M      , KC_COMM    , ST_MACRO_DOT  , KC_SLSH        , OSM(MOD_RSFT) ,
+  MO(_NORMAL_TMP)         , MT(KC_LGUI , KC_LBRACKET) , ALT_T(KC_HOME)  , OSM(MOD_LCTL) , KC_MINUS , MO(_SYML) , KC_NO  , KC_NO   , MO(_SYMR) , KC_EQUAL   , OSM(MOD_RCTL) , ALGR_T(KC_END) , MT(KC_RGUI    , KC_RBRACKET) , MO(_NUM) ,
+                       /* ,            ,              , */      KC_LALT , KC_LCTRL      , KC_LGUI  , KC_F23    , KC_SPC , KC_RGUI , KC_RCTRL  , KC_ALGR /* ,               , */
 )                         ,
 
  [_QWERTY_VIM] = LAYOUT(
@@ -583,8 +583,8 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
   [_APP] = LAYOUT(
     LALT(KC_F4)                 , LALT(LCTL(LSFT(KC_Q))) , LALT(LCTL(LSFT(KC_W))) , LALT(LCTL(LSFT(KC_E))) , LALT(LCTL(LSFT(KC_R))) , LCTL(LGUI(KC_5))        /* ,                             , */            , LALT(LCTL(LSFT(KC_Y))) , LCTL(LGUI(KC_8))       , LCTL(LGUI(KC_1))     , LCTL(LGUI(KC_5))                  , RGUI(KC_V)       , LCTL(KC_F4)            ,
     LGUI(KC_TAB)                , RGUI(KC_A)             , LCTL(LGUI(KC_8))       , LALT(LCTL(LSFT(KC_D))) , LCTL(LGUI(KC_7))       , LALT(LCTL(LSFT(KC_G)))  /* ,                             , */            , LCTL(LGUI(KC_4))       , LALT(LCTL(LSFT(KC_J))) , LCTL(LGUI(KC_3))     , RGUI(KC_SPACE)/*Change_language*/ , LCTL(LGUI(KC_2)) , LALT(LCTL(LSFT(KC_P))) ,
-    LALT(LCTL(KC_PSCREEN))      , LCTL(LGUI(KC_9))       , RGUI(KC_X)             , LALT(LCTL(LSFT(KC_C))) , LALT(LCTL(LSFT(KC_V))) , LALT(LCTL(LSFT(KC_B)))  /* ,                             , */            , LALT(LCTL(LSFT(KC_N))) , LCTL(LGUI(KC_6))       , LALT(KC_TAB)         , LALT(KC_GRAVE)                    , LCTL(LGUI(KC_0)) , KC_PSCREEN             ,
-    RCTL(KC_ESC)/*Windows_key*/ , KC_NO                  , LALT(KC_MINUS)         , LALT(KC_EQUAL)         , KC_LEFT_CURLY_BRACE    , KC_NO                      , RCTL(KC_ESC)/*Windows_key*/ , OSM(MOD_RGUI) , KC_NO                  , KC_RIGHT_CURLY_BRACE   , KC_AUDIO_VOL_UP      , KC_AUDIO_VOL_DOWN                 , KC_NO            , OSM(MOD_LGUI)          ,
+    LALT(LCTL(KC_PSCREEN))      , LCTL(LGUI(KC_9))       , RGUI(KC_X)             , LALT(LCTL(LSFT(KC_C))) , LALT(LCTL(LSFT(KC_V))) , LALT(LCTL(LSFT(KC_B)))  /* ,                             , */            , LALT(LCTL(LSFT(KC_N))) , LCTL(LGUI(KC_6))       , LALT(KC_TAB)         , LALT(KC_GRAVE)                    , LCTL(LGUI(KC_0)) , KC_NO                  ,
+    RCTL(KC_ESC)/*Windows_key*/ , KC_NO                  , LALT(KC_MINUS)         , LALT(KC_EQUAL)         , KC_LEFT_CURLY_BRACE    , KC_NO                      , RCTL(KC_ESC)/*Windows_key*/ , OSM(MOD_RGUI) , KC_NO                  , KC_RIGHT_CURLY_BRACE   , KC_AUDIO_VOL_UP      , KC_AUDIO_VOL_DOWN                 , KC_NO            , KC_PSCREEN             ,
                             /*  ,                        ,                        , */ LALT(KC_MINUS)      , LALT(KC_EQUAL)         , KC_TRANSPARENT             , KC_NO                       , KC_NO         , KC_TRANSPARENT         , KC_AUDIO_VOL_UP        , KC_AUDIO_VOL_DOWN /* ,                                   , */
   )                             ,
   // Debug
