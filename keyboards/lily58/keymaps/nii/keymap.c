@@ -408,7 +408,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
  [_QWERTY] = LAYOUT(
   KC_ESCAPE          , KC_Q        , KC_W               , KC_E                , KC_R        , KC_T /*   ,               , */      , KC_Y      , KC_U     , KC_I            , KC_O           , KC_P        , KC_BSPACE        ,
   ST_MACRO_GRAVE     , KC_A        , KC_S               , KC_D                , KC_F        , KC_G /*   ,               , */      , KC_H      , KC_J     , KC_K            , KC_L           , KC_SCOLON   , ST_MACRO_QUOT    ,
-  OSM(MOD_LSFT)      , KC_Z        , KC_X               , KC_C                , KC_V        , KC_B /*   ,               , */      , KC_N      , KC_M     , KC_COMM         , ST_MACRO_DOT   , KC_SLSH     , RSFT_T(KC_RIGHT) ,
+  OSM(MOD_LSFT)      , KC_Z        , KC_X               , KC_C                , KC_V        , KC_B /*   ,               , */      , KC_N      , KC_M     , KC_COMM         , ST_MACRO_DOT   , KC_SLSH     , OSM(MOD_RSFT)    ,
   MO(_NORMAL_TMP)    , KC_LBRACKET , ALT_T(KC_LBRACKET) , LCTL_T(KC_RBRACKET) , KC_LBRACKET , MO(_SYML) , KC_NO         , KC_HOME , MO(_SYMR) , KC_PGDN  , RCTL_T(KC_PGUP) , ALGR_T(KC_END) , KC_RBRACKET , MO(_NUM)         ,
                   /* ,             ,                    , */      KC_LALT     , KC_LCTRL    , KC_LGUI   , OSM(MOD_LSFT) , KC_SPC  , KC_LEFT   , KC_RCTRL , KC_ALGR /*      ,                , */
 )                    ,
